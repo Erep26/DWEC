@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Ahorcado</title>
+        <link rel="stylesheet" href="index.css"/>
+        <script src="game.js"></script>
+        <script src="strings.js"></script>
+    </head>
+    
+    <body>
+    	<div id="divReloj" width="100px;">
+    		<canvas id="canvasReloj" width="100px" height="100px"></canvas><br/>
+    		<div id="aRelog">12:12:12</div>
+        	<script src="reloj.js"></script>
+        </div>
+        <div id="divTot">
+            <!--button onclick="augmenta()">augmenta</button-->
+            <div id="divPalabra">ahorcado</div>
+            <canvas width="500px" height="500px" id="canvas"></canvas>
+            <div id="divInterface">
+                <div id="divOpt">
+                	<ul>
+                		<li><button onfocus='this.blur();' onclick="start()">Jugar</button><br/></li>
+	                    <li><button onfocus='this.blur();' onclick="reset();">Reset</button><br/></li>
+	                    <li><button onfocus='this.blur();' onclick="document.getElementById('divModal').style.display='block'">A&#209;adir<br/>palabra</button></li>
+                	</ul>
+                </div>
+				<div id="divLetras"></div>
+            </div>
+        </div>
+        <div id="divModal" class="modal">
+        	<div class="contModal">
+	            <button style="float: right;" onclick="document.getElementById('divModal').style.display='none'">X</button>
+	            <div style="padding: 20px;">
+	                <span>nueva palabra: </span>
+	                <form onsubmit="addPalabra(this.strPal.value); return false;">
+	                	<input type="text" maxlength="11" autocomplete="off" name="strPal" onkeypress="return valida(event);" style="background: transparent; font-size: 2em; width: 70%;"/>
+	                	<input style="background: transparent; width: 50px; height: 50px; padding: 0px; margin-left: 10px;" type="submit" value="+"/>
+	                </form><br/>
+	                <div id="divTable"></div>
+	            </div>
+            </div>
+        </div>
+        <div id="divModalMsj" class="modal">
+        	<div class="contModal" style="height: 220px!important;">
+        		<button style="float: right;" onclick="document.getElementById('divModalMsj').style.display='none'">X</button>
+        		<div id="contMsj" style="padding: 20px; font-size: 2em;"></div>
+        	</div>
+        </div>
+    </body>
+    
+</html>

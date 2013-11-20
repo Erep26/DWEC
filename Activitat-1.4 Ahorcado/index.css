@@ -1,0 +1,202 @@
+@font-face
+{
+ font-family: 'RiscadaDoodle';
+ src: url('font/RiscadaDoodle.ttf');
+}
+html{
+    min-height: 100%;
+    min-width: 100%;
+    padding:0;
+	margin:0; 
+	border:0;
+	background-image: url('img/back.png');
+	
+}
+body{
+    margin: 0px;
+    min-height: 100%;
+    min-width: 100%;
+    font-family:RiscadaDoodle;
+    background-image: url('img/lado.png');
+	background-repeat: repeat-y;
+	position:absolute;
+    
+}
+
+span, input{
+    font-family:RiscadaDoodle;
+    font-size: 2em;
+}
+input{
+    border: dashed 3px black;
+}
+/*#divLado{
+    min-height: 100%;
+    width: 100px;
+    position: absolute;
+    background-image: url('img/lado.png');
+}*/
+#divTot{
+    /*position: fixed;*/
+    margin-left: 130px;
+    /*background: repeat;*/
+}
+#divPalabra{
+    font-size: 5em;
+    float: left;
+    width: 50%;
+    margin-left: auto;
+    padding-top: 50px;
+}
+
+#divOpt{
+	border-radius: 10px;
+    padding-left: 100px;
+    border: 0px 1px 1px 0px solid black;
+    box-shadow: 10px 10px 10px black;
+    background-image: url('img/back2.png');
+    background-color: #FEFFC1;
+    position: absolute;
+    float: left;
+    left: -250px;
+    transition: left 0.4s linear;
+    
+}
+#divOpt:hover{
+	left: -80px;
+}
+
+#divOpt ul{
+	float: left;
+	height: 240px;
+    margin: 0px;
+    list-style: none;
+    margin-right: 10px;
+}
+#divOpt button{
+    font-family:RiscadaDoodle;
+    font-size: 2em;
+    border-radius: 100%;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    box-shadow: 5px 5px 10px 2px #848484;
+}
+#divOpt button:hover{
+    box-shadow: 5px 5px 10px 2px black;
+}
+
+#divInterface{
+    clear: both;
+}
+#canvas{
+    display: block;
+    float: left;
+    z-index: 2;
+    /*margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;*/
+}
+#divLetras{
+    float: left;
+    min-width: 640px;
+}
+
+
+#divLetras span{
+	padding: 10px;
+}
+
+#divLetras .tacha{
+	background-image: url('img/cruz.png');
+	box-shadow: none!important;
+}
+#divLetras .tacha button{
+	box-shadow: none!important;
+	cursor: default!important;
+}
+#divLetras .tacha button:hover{
+	box-shadow: none!important;
+}
+
+#divLetras button{
+    font-family:RiscadaDoodle;
+    font-size: 1em;
+    background: transparent;
+    border: solid 1px black;
+    box-shadow: 5px 5px 10px #848484;
+    /*margin-left: 20px;
+    margin-top: 10px;*/
+    cursor: pointer;
+    width: 44px;
+	height: 44px;
+}
+
+#divLetras button:hover{
+    box-shadow: 5px 5px 10px black;
+}
+
+.modal{
+    background-color: rgba(0,0,0,0.5);
+    z-index: 10;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: none;
+    top: 0px;
+    left: 0px;
+}
+.contModal
+{
+	background-image: url('img/back2.png');
+    background-color: #FEFFC1;
+    border-radius: 10px;
+    border: 1px solid black;
+    box-shadow: 10px 10px 10px black;
+    position: absolute;
+	top: 25%;
+    left: 38%;
+    width: 300px;
+    height: 350px;
+    margin: auto;
+}
+
+#divTable{
+    display: block;
+    position: relative;
+    height: 200px;
+    overflow: scroll;
+    padding-left: 20px;
+    padding-right: 50px;
+    margin-top: 5px;
+}
+
+#divReloj{
+	position: absolute;
+	float: right;
+	z-index: 3;
+	top: 10px;
+	left: 90%;
+}
+
+#aRelog{
+	position: relative;
+	width: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#return{
+	position: absolute;
+}
+
+#return div{
+	border: solid 1px black;
+    cursor: pointer;
+    position: relative;
+    float: left;
+}
+
+#littleRet:hover + #ret, #ret:hover{
+	box-shadow: 5px 5px 10px black!important;
+}

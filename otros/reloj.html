@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+    #canvas{
+        /*width: 100px;
+        height: 100px;*/
+        border: solid 1px black;
+    }
+    </style>
+</head>
+
+<body>
+    <span id='time'></span> <br/>
+    <canvas width="150px" id="canvas"></canvas>
+
+
+<script type="text/javascript">
+    var canvas = document.getElementById('canvas');
+    canvas.height = canvas.width;
+    var tam = canvas.width/250;
+    var ctx = canvas.getContext('2d');
+    var centro = 125*tam;
+
+    function dibNum()
+    {
+        for(var i = 1; i < 13; i++)
+        {
+            var angulo = ((2*Math.PI*i)/12)-(Math.PI)/2;
+            var x = Math.cos(angulo)*115*tam
+            var y = Math.sin(angulo)*115*tam
+
+            ctx.fillText(i,x,y);
+        }
+    }
+
+    function dibuja(angulo, color, grosor, largo){
+        
+        var x = Math.cos(angulo)*largo*tam;
+        var y = Math.sin(angulo)*largo*tam;
+
+        ctx.beginPath();
+        ctx.lineWidth=grosor*tam;
+        ctx.strokeStyle=color;
+        ctx.moveTo(0,0);
+        ctx.lineTo(x, y);
+        ctx.stroke()
+    }
+
+    setInterval(function(){
+        canvas.width=canvas.width;
+        ctx.translate(centro,centro);
+
+        var date = new Date();
+        
+        var ms = ((2*Math.PI*date.getMilliseconds())/1000)-(Math.PI)/2;
+        var s = ((2*Math.PI*date.getSeconds())/60)-(Math.PI)/2;
+        var m = ((2*Math.PI*date.getMinutes())/60)-(Math.PI)/2;
+        //var h = ((2*Math.PI*date.getHours())/12)-(Math.PI)/2;
+
+        var h = (2*Math.PI*date.getHours()+((2*Math.PI*date.getMinutes())/(60)))/12-(Math.PI)/2;
+        
+        dibNum();
+
+        dibuja(h, "black", 4, 50);
+        dibuja(m, "black", 3, 100);
+        dibuja(s, "red", 2, 110);
+        dibuja(ms, "blue", 3, 40);
+
+        document.getElementById('time').innerHTML = date;
+        
+    }, 1);
+    </script>
+</body>
+</html>

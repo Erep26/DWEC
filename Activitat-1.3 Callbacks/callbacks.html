@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Callbacks</title>
+    <style>
+        #divTot{
+            width: 900px;;
+            margin: auto;
+        }
+        #clasica, #ambCallback, #assincrona{
+            width: 33%;
+            height: 500px;
+            border: 1px black solid;
+            float: left;
+            overflow: scroll;
+        }
+        .func1{
+            background-color: #FEADAD;
+        }
+        .func2{
+            background-color: #B1FFBD;
+        }
+        .func3{
+            background-color: #ACFFFD;
+        }
+        .func4{
+            background-color: #FFF484;
+        }
+        .butons{
+            margin: 1px;
+            width: 33%;
+            float: left;
+        }
+        .butAccio{
+            margin: auto;
+            width:79%;
+        }
+        .butBorra{
+            margin: auto;
+            width: 19%;
+        }
+        #codigo
+        {
+            clear: both;
+            background-color: #B3B3B3;
+            overflow: scroll;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+        
+    </style>
+    <script>
+        
+        function funcion2(tipo)
+        {
+            document.getElementById(tipo).innerHTML+="<span class='func2'>Empieza la ejecución de segunda()</span><br/>"
+            console.log("Empieza la ejecución de segunda()");
+            for(var i = 0; i <= 100; i++)
+            {
+                if (i == 0)
+                {
+                    document.getElementById(tipo).innerHTML+="<span class='func2'>Entro al bucle llarg()</span><br/>"
+                    console.log("Surto del bucle llarg()");
+                }
+                
+                if (i == 100)
+                {
+                    document.getElementById(tipo).innerHTML+="<span class='func2'>Surto del bucle llarg()</span><br/>"
+                    console.log("Surto del bucle llarg()");
+                }
+            }
+            document.getElementById(tipo).innerHTML+="<span class='func2'>Acaba la ejecución de segunda()</span><br/>"
+            console.log("Acaba la ejecución de segunda()")
+        }
+
+        function funcion3(tipo)
+        {
+            document.getElementById(tipo).innerHTML+="<span class='func3'>Empieza la ejecución de tercera()</span><br/>"
+            console.log("Empieza la ejecución de tercera()");
+            for(var i = 0; i <= 100; i++)
+            {
+                if (i == 0)
+                {
+                    document.getElementById(tipo).innerHTML+="<span class='func3'>Entro al bucle llarg()</span><br/>"
+                    console.log("Entro al bucle llarg()");
+                }
+                
+                if (i == 100)
+                {
+                    document.getElementById(tipo).innerHTML+="<span class='func3'>Surto del bucle llarg()</span><br/>"
+                    console.log("Surto del bucle llarg()");
+                }
+            }
+            document.getElementById(tipo).innerHTML+="<span class='func3'>Acaba la ejecución de tercera()</span><br/>"
+            console.log("Acaba la ejecución de tercera()")
+        }
+
+        function funcion4(tipo)
+        {
+            document.getElementById(tipo).innerHTML+="<span class='func4'>Empieza la ejecución de cuarta()</span><br/>"
+            console.log("Empieza la ejecución de cuarta()");
+
+            alert("Se muestra el alert");
+            console.log("Se muestra el alert")
+
+            document.getElementById(tipo).innerHTML+="<span class='func4'>Acaba la ejecución de cuarta()</span><br/>"
+            console.log("Acaba la ejecución de cuarta()")
+        }
+
+
+
+
+        function primeraClasica()
+        {
+            document.getElementById('clasica').innerHTML+="<span class='func1'>Empieza la ejecución de primera()</span><br/>";
+            console.log("Empieza la ejecución de primera()");
+
+            document.getElementById('clasica').innerHTML+="<span class='func1'>Llamo a segunda()desde primera()</span><br/>";
+            console.log("Llamo a segunda()desde primera()")
+            funcion2('clasica');
+            document.getElementById('clasica').innerHTML+="<span class='func1'>Acabo de llamar a segunda desde primera()</span><br/>";
+            console.log("Acabo de llamar a segunda desde primera()");
+
+            document.getElementById('clasica').innerHTML+="<span class='func1'>Llamo a tercera()desde primera()</span><br/>";
+            console.log("Llamo a tercera()desde primera()");
+            funcion3('clasica');
+            document.getElementById('clasica').innerHTML+="<span class='func1'>Acabo de llamar a tercera desde primera()</span><br/>";
+            console.log("Acabo de llamar a tercera desde primera()");
+
+            document.getElementById('clasica').innerHTML+="<span class='func1'>Acaba la ejecución de primera()</span><br/>";
+            console.log("Acaba la ejecución de primera()");
+        }
+
+
+
+        function callback()
+        {
+            var rand = parseInt(Math.random()*2);
+                    if( rand == 1 )
+                    {
+                        document.getElementById('ambCallback').innerHTML+="<span class='func1'>Llamo a segunda()desde primera()</span><br/>"
+                        console.log("Llamo a segunda()desde primera()");
+                        funcion2('ambCallback');
+                        document.getElementById('ambCallback').innerHTML+="<span class='func1'>Acabo de llamar a segunda desde primera()</span><br/>";
+                        console.log("Acabo de llamar a segunda desde primera()")
+                    }
+                    else
+                    {
+                        document.getElementById('ambCallback').innerHTML+="<span class='func1'>Llamo a tercera()desde primera()</span><br/>";
+                        console.log("Llamo a tercera()desde primera()");
+                        funcion3('ambCallback');
+                        document.getElementById('ambCallback').innerHTML+="<span class='func1'>Acabo de llamar a tercera desde primera()</span><br/>";
+                        console.log("Acabo de llamar a tercera desde primera()");
+                    }
+        }
+        function primeraAmbCallback()
+        {
+            document.getElementById('ambCallback').innerHTML+="<span class='func1'>Empieza la ejecución de primera()</span><br/>";
+            console.log("Empieza la ejecución de primera()");
+            callback(callback());
+            document.getElementById('ambCallback').innerHTML+="<span class='func1'>Acaba la ejecución de primera()</span><br/>";
+            console.log("Acaba la ejecución de primera()");
+        }
+
+
+
+
+        function callbackAsincrona()
+        {
+            document.getElementById('assincrona').innerHTML+="<span class='func1'>Preparo el llançament de quarta()</span><br/>"
+            console.log("Preparo el llançament de quarta()");
+            setTimeout(function(){funcion4('assincrona')}, 5000);
+        }
+        function primeraAssincrona()
+        {
+            document.getElementById('assincrona').innerHTML+="<span class='func1'>Empieza la ejecución de primera()</span><br/>"
+            console.log("Empieza la ejecución de primera()");
+            
+            document.getElementById('assincrona').innerHTML+="<span class='func1'>Llamo a segunda() desde principal()</span><br/>"
+            console.log("Llamo a segunda() desde principal()");
+            funcion2('assincrona', callbackAsincrona());
+            document.getElementById('assincrona').innerHTML+="<span class='func1'>Acabo de llamar a segunda desde primera()</span><br/>"
+            console.log("Acabo de llamar a segunda desde primera()");
+
+            document.getElementById('assincrona').innerHTML+="<span class='func1'>Acaba la ejecución de primera()</span><br/>";
+            console.log("Acaba la ejecución de primera()");
+        }
+    </script>
+</head>
+
+<body>
+    <table  style="float: left;">
+        <tr><td class="func1">primera()</td></tr>
+        <tr><td class="func2">segona()</td></tr>
+        <tr><td class="func3">tercera()</td></tr>
+        <tr><td class="func4">cuarta()</td></tr>
+    </table>
+    <div id="divTot">
+        <h1>Ejemplo</h1>
+        <div id="clasica"></div>
+        <div id="ambCallback"></div>
+        <div id="assincrona"></div>
+        <div class="butons">
+            <button class="butAccio" onclick="primeraClasica();">Classica</button>
+            <button class="butBorra" onclick="document.getElementById('clasica').innerHTML=''">Borra</button>
+        </div>
+        <div class="butons">
+            <button class="butAccio" onclick="primeraAmbCallback();">Amb callback</button>
+            <button class="butBorra" onclick="document.getElementById('ambCallback').innerHTML=''">Borra</button>
+        </div>
+        <div class="butons">
+            <button class="butAccio" onclick="primeraAssincrona();">Assincrona</button>
+            <button class="butBorra" onclick="document.getElementById('assincrona').innerHTML=''">Borra</button>
+        </div>
+
+        <h1>Codigo</h1>
+        <div id="codigo">
+            <pre>
+                <code>
+                </code>
+            </pre>
+        </div>
+        <div>
+            <h1>Conclusio</h1>
+            Els callbacks ens serveixen per executar alguna cosa al acavar la funcio, abegades tambe ens poden servir per recosllir les dades resultants d'una funcion com pasa amb jqury o node.js
+        </div>
+    </div>
+</body>
+</html>

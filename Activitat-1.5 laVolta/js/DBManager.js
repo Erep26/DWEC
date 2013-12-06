@@ -12,14 +12,14 @@
         var openRequest = indexedDB.open("laVolta",1);
 
         openRequest.onupgradeneeded  = function (event) {
-                console.log("update");
+                //console.log("update");
                 db = this.result;
-                db.deleteObjectStore('partidas');
+                //db.deleteObjectStore('partidas');
                  try {
                     var store = db.createObjectStore("partidas",{keyPath: 'partida', autoIncrement:true},false);
                     store.createIndex("selected", "selected", { unique: false });
                 } catch  (e) {
-                    console.log("Exception creating object store: " + e);
+                    //console.log("Exception creating object store: " + e);
                 }
             }
 

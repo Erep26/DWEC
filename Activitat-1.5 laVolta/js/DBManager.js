@@ -1,4 +1,3 @@
-
   window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
   window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
   window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
@@ -10,7 +9,7 @@
 
   var db;
     if("indexedDB" in window) {
-        var openRequest = indexedDB.open("laVolta",10);
+        var openRequest = indexedDB.open("laVolta",1);
 
         openRequest.onupgradeneeded  = function (event) {
                 console.log("update");

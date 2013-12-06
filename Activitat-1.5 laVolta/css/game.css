@@ -49,6 +49,44 @@
   border-bottom-color: #CD482E;
 }
 
+#container{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+}
+
+#miCanvas{
+	width: 100%;
+	clear: both;
+}
+
+.equipos{
+	float:left;
+	width: 50%;
+	min-width: 458px;
+}
+@media (max-width: 1144px){
+	.equipos{
+		float:left;
+		width: 100%;
+		min-width: 0px;
+	}
+}
+@media (max-width: 375px){
+	#container{
+		width: 100%;
+	}
+}
+
+#cor11Nom, #cor12Nom, #cor13Nom, #cor21Nom, #cor22Nom, #cor23Nom{
+	min-width: 119px;
+}
+
+label{
+	margin-top: 5px;
+	margin-bottom: 0px;
+}
+
 .agua, .grasa, .azucar {
 	width: 50px;
 	height: 30px;

@@ -42,3 +42,66 @@ label{
 #footerModal{
 	margin-top: 0px;
 }
+
+#equipo1 {
+  border-color: #ebccd1;
+}
+
+#equipo1 > .panel-heading {
+  color: #FFFFFF;
+  background-color: #CD482E;
+  border-color: #CD482E;
+}
+
+#equipo1 > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #ebccd1;
+}
+
+#equipo1 > .panel-heading > .dropdown .caret {
+  border-color: #CD482E transparent;
+}
+
+#equipo1 > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #CD482E;
+}
+
+#myModal > div{
+	min-width: 740px;
+	width: 65%;
+}
+
+@media (max-width: 770px){
+	#myModal > div{
+		min-width: 0px;
+		width: 100%;
+	}
+}
+
+@media (max-width: 395px){
+	.nav-tabs{
+		font-size: 15px;
+	}
+}
+
+#inputTipo{
+	font-size: .8em;
+	margin-top: 10px;
+	min-width: 138px;
+}
+
+@media (max-width: 767px){
+	#inputTipo{
+		clear: both;
+	}
+}
+
+.repMts{
+	float: right;
+	white-space:nowrap;
+}
+
+@media (max-width: 369px){
+	.repMts{
+		float: none!important;
+	}
+}

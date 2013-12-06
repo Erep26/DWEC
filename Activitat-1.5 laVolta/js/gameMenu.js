@@ -62,8 +62,6 @@ function newGame(){
 		//e.preventDefault();//el return false de los event listeners
 	}
 
-	
-
 	function corrdor(ncor){
 		return 	'<label class="col-sm-5 control-label col-sm-offset-1">Nombre</label>'+
 				'<div class="col-sm-5">'+
@@ -74,9 +72,8 @@ function newGame(){
 					'<input onchange="puntos(this, '+parseInt(ncor/10)+');" min="0" id="mts'+ncor+'" name="mts'+ncor+'" type="number" value="333" class="form-control"></input>'+
 				'</div>'+
 
-
-				'<br/><br/><label class="pull-left col-sm-5 control-label col-sm-offset-1">Tipo</label>'+
-				'<div class="col-sm-5" style="font-size: .8em; margin-top: 10px;">'+
+				'<label class="pull-left col-sm-5 control-label col-sm-offset-1" style="clear: both;">Tipo</label>'+
+				'<div id="inputTipo" class="col-sm-5">'+
 					'<input type="radio" name="tipoCorr'+ncor+'" value="Jefe de filas" checked/> Jefe de filas<br/>'+
 					'<input type="radio" name="tipoCorr'+ncor+'" value="Gregario"/> Gregario'+
 				'</div>';
@@ -100,8 +97,8 @@ function newGame(){
 								'<div id="equipo1" class="panel panel-primary">'+
 									'<div class="panel-heading">'+
 										'<h4 class="panel-title">'+
-											'Equipo 1'+
-											'<span class="pull-right">Metros a repartir <span id="pntRep1" style="width: 50px; display: inline-block; text-align: right;">1</span></span>'+
+											'Equipo 1  '+
+											'<span class="repMts">Metros a repartir <span id="pntRep1" style="width: 50px; display: inline-block; text-align: right;">1</span></span>'+
 										'</h4>'+
 					        		'</div>'+
 									'<div class="panel-body form-group">'+
@@ -110,11 +107,10 @@ function newGame(){
 											'<input type="text" name="eqp1" required class="form-control" placeholder="Nombre Equipo 1">'+
 										'</div>'+
 
-
 										'<ul class="nav nav-tabs" style="margin-top: 40px;">'+
-										  '<li class="active"><a href="#tabCor11" data-toggle="tab">Corredor 1</a></li>'+
-										  '<li><a href="#tabCor12" data-toggle="tab">Corredor 2</a></li>'+
-										  '<li><a href="#tabCor13" data-toggle="tab">Corredor 3</a></li>'+
+										  '<li class="active" style=" width: 33%;"><a href="#tabCor11" data-toggle="tab" style="padding: 10px;">Corredor 1</a></li>'+
+										  '<li style=" width: 33%;"><a href="#tabCor12" data-toggle="tab" style="padding: 10px;">Corredor 2</a></li>'+
+										  '<li style=" width: 33%;"><a href="#tabCor13" data-toggle="tab" style="padding: 10px;">Corredor 3</a></li>'+
 										'</ul>'+
 
 										'<div class="tab-content" style="margin-top: 10px;">'+
@@ -128,10 +124,6 @@ function newGame(){
 										  	corrdor(13)+
 										  '</div>'+
 										'</div>'+
-
-
-
-
 									'</div>'+
 								'</div>'+
 							'</div>'+
@@ -140,8 +132,8 @@ function newGame(){
 								'<div id="equipo2" class="panel panel-primary">'+
 									'<div class="panel-heading">'+
 										'<h4 class="panel-title">'+
-											'Equipo 2'+
-											'<span class="pull-right">Metros a repartir <span id="pntRep2" style="width: 50px; display: inline-block; text-align: right;">1</span></span>'+
+											'Equipo 2 '+
+											'<span class="repMts">Metros a repartir <span id="pntRep2" style="width: 50px; display: inline-block; text-align: right;">1</span></span>'+
 										'</h4>'+
 					        		'</div>'+
 									'<div class="panel-body form-group">'+
@@ -151,9 +143,9 @@ function newGame(){
 										'</div>'+
 
 										'<ul class="nav nav-tabs" style="margin-top: 40px;">'+
-											'<li class="active"><a href="#tabCor21" data-toggle="tab">Corredor 1</a></li>'+
-											'<li><a href="#tabCor22" data-toggle="tab">Corredor 2</a></li>'+
-											'<li><a href="#tabCor23" data-toggle="tab">Corredor 3</a></li>'+
+											'<li class="active" style=" width: 33%;"><a href="#tabCor21" data-toggle="tab" style="padding: 10px;">Corredor 1</a></li>'+
+											'<li style=" width: 33%;"><a href="#tabCor22" data-toggle="tab" style="padding: 10px;">Corredor 2</a></li>'+
+											'<li style=" width: 33%;"><a href="#tabCor23" data-toggle="tab" style="padding: 10px;">Corredor 3</a></li>'+
 										'</ul>'+
 										'<div class="tab-content" style="margin-top: 10px;">'+
 											'<div class="tab-pane active" id="tabCor21">'+
@@ -166,8 +158,6 @@ function newGame(){
 												corrdor(23)+
 											'</div>'+
 										'</div>'+
-
-
 									'</div>'+
 								'</div>'+
 							'</div>'+

@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="css/game.css" />
 		<script type="text/javascript" src="js/partidas.js"></script>
 		<script type="text/javascript" src="js/imgCharge.js"></script>
-		<script type="text/javascript" src="js/parallax.js"></script>
+		<script type="text/javascript" src="js/animacion.js"></script>
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="js/DBManager.js"></script>
@@ -14,12 +14,10 @@
 	</head>
 
 	<body>
-		<div class="container">
-			<canvas id="miCanvas" width="1000px" height="400px" style="border: solid 1px black; top: 0px; left: 0px;"> navegador no compatible</canvas>
+		<div id="container"><!--id container no pertenece a las css de bootstrap-->
+			<canvas id="miCanvas" width="800px" height="250px" style="border: solid 1px black; top: 0px; left: 0px;"> navegador no compatible</canvas>
 
-			<button onclick="pasaTurno();">Pasar turno</button>
-
-			<div  class="col-xs-5">
+			<div  class="col-xs-5 equipos">
 				<div id="equipo1" class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -31,137 +29,166 @@
 							</span>
 						</h3>
 	        		</div>
-					<div class="panel-body">
+					<div class="panel-body" style="padding: 0px;">
 
-						<div class="panel-group" id="team1">
-						 	<div class="panel panel-default">
-								<div class="panel-heading">
-						    		<h4 class="panel-title" style="height: 30px;">
-						        		<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor11" data-parent="#team1">
-											<span class ="col-xs-4" id="cor11Nom">Corredor 1</span>
-											<div class="progress">
-												<div id="barra11" class=" progress-bar" style="width:0%;">
-													<span class="sr-only"></span>
-													<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+						<button id="btn1" class="btn btn-primary" style="width: 80%; margin-left: 10%; margin-right: 10%;" onclick="pasaTurno(this);">Pasar turno</button>
+
+						<ul class="nav nav-tabs" style="margin-top: 5px;">
+							<li class="active"><a href="#ordcorr1" data-toggle="tab" style="padding: 10px;">Orden de corredor</a></li>
+							<li><a href="#ordeqp1" data-toggle="tab" style="padding: 10px;">Orden de equipo</a></li>
+						</ul>
+						<div class="tab-content" style="padding: 15px;">
+							<div class="tab-pane fade in active" id="ordcorr1">
+								<div class="panel-group" id="team1">
+								 	<div class="panel panel-default">
+										<div class="panel-heading">
+								    		<h4 class="panel-title" style="height: 30px;">
+								        		<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor11" data-parent="#team1">
+													<span class ="col-xs-4" id="cor11Nom">Corredor 1</span>
+													<div class="progress">
+														<div id="barra11" class=" progress-bar" style="width:0%;">
+															<span class="sr-only"></span>
+															<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+														</div>
+													</div>
+						        				</span>
+						      				</h4>
+						    			</div>
+									    <div id="collapseCor11" class="panel-collapse collapse in">
+									      	<div class="panel-body">
+									      		<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+												<div id="esf11" class="col-sm-7" style="margin-bottom: 10px;">
+													<input type="range" min="0" max="100" onchange="sincEsf(11); partidaActual.equipos[0].corredores[0].esfuerzo = this.value"/>
+													<input type="text" disabled style="width: 35px;"/>%
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="agua11" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[0].agua = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="gluc11" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[0].azucar = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="grasa11" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[0].grasa = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="mts11" min="0" type="text" class="form-control" disabled/>
 												</div>
 											</div>
-				        				</span>
-				      				</h4>
-				    			</div>
-							    <div id="collapseCor11" class="panel-collapse collapse in">
-							      	<div class="panel-body">
-							      		<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
-										<div id="esf11" class="col-sm-7" style="margin-top: 10px;">
-											<input type="range" min="0" max="100" onchange="sincEsf(11); partidaActual.equipos[0].corredores[0].esfuerzo = this.value"/>
-											<input type="text" disabled style="width: 35px;"/>%
+						    			</div>
+						  			</div>
+						  			<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title" style="height: 30px;">
+												<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor12" data-parent="#team1">
+													<span class ="col-xs-4" id="cor12Nom">Corredor 1</span>
+													<div class="progress">
+														<div id="barra12" class=" progress-bar" style="width:0%;">
+															<span class="sr-only"></span>
+															<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+														</div>
+													</div>
+												</span>
+											</h4>
 										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="agua11" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[0].agua = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="gluc11" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[0].azucar = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="grasa11" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[0].grasa = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="mts11" min="0" type="text" class="form-control" disabled/>
+										<div id="collapseCor12" class="panel-collapse collapse">
+											<div class="panel-body">
+												<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+												<div id="esf12" class="col-sm-7" style="margin-bottom: 10px;">
+													<input type="range" min="0" max="100" onchange="sincEsf(12); partidaActual.equipos[0].corredores[1].esfuerzo = this.value"/>
+													<input type="text" disabled style="width: 35px;"/>%
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="agua12" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[1].agua = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="gluc12" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[1].azucar = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="grasa12" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[1].grasa = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="mts12" min="0" type="text" class="form-control" disabled/>
+												</div>
+											</div>
 										</div>
 									</div>
-				    			</div>
-				  			</div>
-				  			<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title" style="height: 30px;">
-										<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor12" data-parent="#team1">
-											<span class ="col-xs-4" id="cor12Nom">Corredor 1</span>
-											<div class="progress">
-												<div id="barra12" class=" progress-bar" style="width:0%;">
-													<span class="sr-only"></span>
-													<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title" style="height: 30px;">
+												<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor13" data-parent="#team1">
+													<span class ="col-xs-4" id="cor13Nom">Corredor 1</span>
+													<div class="progress">
+														<div id="barra13" class=" progress-bar" style="width:0%;">
+															<span class="sr-only"></span>
+															<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+														</div>
+													</div>
+												</span>
+											</h4>
+										</div>
+										<div id="collapseCor13" class="panel-collapse collapse">
+											<div class="panel-body">
+												<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+												<div id="esf13" class="col-sm-7" style="margin-bottom: 10px;">
+													<input type="range" min="0" max="100" onchange="sincEsf(13); partidaActual.equipos[0].corredores[2].esfuerzo = this.value"/>
+													<input type="text" disabled style="width: 35px;"/>%
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="agua13" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[2].agua = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="gluc13" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[2].azucar = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="grasa13" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[2].grasa = this.value"/>
+												</div>
+												<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
+												<div class="col-sm-6" style="margin-bottom: 10px;">
+													<input id="mts13" min="0" type="text" class="form-control" disabled/>
 												</div>
 											</div>
-										</span>
-									</h4>
-								</div>
-								<div id="collapseCor12" class="panel-collapse collapse">
-									<div class="panel-body">
-										<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
-										<div id="esf12" class="col-sm-7" style="margin-top: 10px;">
-											<input type="range" min="0" max="100" onchange="sincEsf(12); partidaActual.equipos[0].corredores[1].esfuerzo = this.value"/>
-											<input type="text" disabled style="width: 35px;"/>%
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="agua12" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[1].agua = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="gluc12" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[1].azucar = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="grasa12" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[1].grasa = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="mts12" min="0" type="text" class="form-control" disabled/>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title" style="height: 30px;">
-										<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor13" data-parent="#team1">
-											<span class ="col-xs-4" id="cor13Nom">Corredor 1</span>
-											<div class="progress">
-												<div id="barra13" class=" progress-bar" style="width:0%;">
-													<span class="sr-only"></span>
-													<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
-												</div>
-											</div>
-										</span>
-									</h4>
-								</div>
-								<div id="collapseCor13" class="panel-collapse collapse">
-									<div class="panel-body">
-										<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
-										<div id="esf13" class="col-sm-7" style="margin-top: 10px;">
-											<input type="range" min="0" max="100" onchange="sincEsf(13); partidaActual.equipos[0].corredores[2].esfuerzo = this.value"/>
-											<input type="text" disabled style="width: 35px;"/>%
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="agua13" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[2].agua = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="gluc13" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[2].azucar = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="grasa13" min="0" type="number" class="form-control" onchange="partidaActual.equipos[0].corredores[2].grasa = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="mts13" min="0" type="text" class="form-control" disabled/>
-										</div>
+							<div class="tab-pane" id="ordeqp1">
+								<div class="panel-body">
+									<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+									<div id="esf1" class="col-sm-7" style="margin-bottom: 10px;">
+										<input type="range" min="0" max="100" onchange="sincEsf(1);"/>
+										<input type="text" disabled style="width: 35px;"/>%
+									</div>
+									<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+									<div class="col-sm-6" style="margin-bottom: 10px;">
+										<input id="agua1" min="0" type="number" class="form-control" onchange=""/>
+									</div>
+									<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+									<div class="col-sm-6" style="margin-bottom: 10px;">
+										<input id="gluc1" min="0" type="number" class="form-control" onchange=""/>
+									</div>
+									<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+									<div class="col-sm-6" style="margin-bottom: 10px;">
+										<input id="grasa1" min="0" type="number" class="form-control" onchange=""/>
 									</div>
 								</div>
 							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			</div>
 
-			<div  class="col-xs-5">
-
-
+			<div  class="col-xs-5 equipos">
 				<div id="equipo2" class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">
@@ -173,134 +200,163 @@
 							</span>
 						</h3>
 	        		</div>
-					<div class="panel-body">
-						<div class="panel-group" id="team2">
-						 	<div class="panel panel-default">
-								<div class="panel-heading">
-						    		<h4 class="panel-title" style="height: 30px;">
-						        		<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor21" data-parent="#team2">
-											<span class ="col-xs-4" id="cor21Nom">Corredor 1</span>
-											<div class="progress">
-												<div id="barra21" class=" progress-bar" style="width:0%;">
-													<span class="sr-only"></span>
-													<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+					<div class="panel-body" style="padding: 0px;">
+						<button id="btn2" class="btn btn-primary" style="width: 80%; margin-left: 10%; margin-right: 10%;" onclick="pasaTurno(this);">Pasar turno</button>
+						<ul class="nav nav-tabs" style="margin-top: 5px;">
+							<li class="active"><a href="#ordcorr2" data-toggle="tab" style="padding: 10px;">Orden de corredor</a></li>
+							<li><a href="#ordeqp2" data-toggle="tab" style="padding: 10px;">Orden de equipo</a></li>
+						</ul>
+
+						<div class="tab-content" style="padding: 15px;">
+							<div class="tab-pane fade in active" id="ordcorr2">
+								<div class="panel-group" id="team2">
+							 	<div class="panel panel-default">
+									<div class="panel-heading">
+							    		<h4 class="panel-title" style="height: 30px;">
+							        		<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor21" data-parent="#team2">
+												<span class ="col-xs-4" id="cor21Nom">Corredor 1</span>
+												<div class="progress">
+													<div id="barra21" class=" progress-bar" style="width:0%;">
+														<span class="sr-only"></span>
+														<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+													</div>
 												</div>
+					        				</span>
+					      				</h4>
+					    			</div>
+								    <div id="collapseCor21" class="panel-collapse collapse in">
+								      	<div class="panel-body">
+								      		<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+											<div id="esf21" class="col-sm-7" style="margin-bottom: 10px;">
+												<input type="range" min="0" max="100" onchange="sincEsf(21); partidaActual.equipos[1].corredores[0].esfuerzo = this.value"/>
+												<input type="text" disabled style="width: 35px;"/>%
 											</div>
-				        				</span>
-				      				</h4>
-				    			</div>
-							    <div id="collapseCor21" class="panel-collapse collapse in">
-							      	<div class="panel-body">
-							      		<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
-										<div id="esf21" class="col-sm-7" style="margin-top: 10px;">
-											<input type="range" min="0" max="100" onchange="sincEsf(21); partidaActual.equipos[1].corredores[0].esfuerzo = this.value"/>
-											<input type="text" disabled style="width: 35px;"/>%
+											<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="agua21" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[0].agua = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="gluc21" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[0].azucar = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="grasa21" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[0].grasa = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="mts21" min="0" type="text" class="form-control" disabled/>
+											</div>
 										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="agua21" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[0].agua = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="gluc21" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[0].azucar = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="grasa21" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[0].grasa = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="mts21" min="0" type="text" class="form-control" disabled/>
+					    			</div>
+					  			</div>
+					  			<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title" style="height: 30px;">
+											<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor22" data-parent="#team2">
+												<span class ="col-xs-4" id="cor22Nom">Corredor 1</span>
+												<div class="progress">
+													<div id="barra22" class=" progress-bar" style="width:0%;">
+														<span class="sr-only"></span>
+														<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+													</div>
+												</div>
+											</span>
+										</h4>
+									</div>
+									<div id="collapseCor22" class="panel-collapse collapse">
+										<div class="panel-body">
+											<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+											<div id="esf22" class="col-sm-7" style="margin-bottom: 10px;">
+												<input type="range" min="0" max="100" onchange="sincEsf(22); partidaActual.equipos[1].corredores[1].esfuerzo = this.value"/>
+												<input type="text" disabled style="width: 35px;"/>%
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="agua22" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[1].agua = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="gluc22" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[1].azucar = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="grasa22" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[1].grasa = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="mts22" min="0" type="text" class="form-control" disabled/>
+											</div>
 										</div>
 									</div>
-				    			</div>
-				  			</div>
-				  			<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title" style="height: 30px;">
-										<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor22" data-parent="#team2">
-											<span class ="col-xs-4" id="cor22Nom">Corredor 1</span>
-											<div class="progress">
-												<div id="barra22" class=" progress-bar" style="width:0%;">
-													<span class="sr-only"></span>
-													<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
-												</div>
-											</div>
-										</span>
-									</h4>
 								</div>
-								<div id="collapseCor22" class="panel-collapse collapse">
-									<div class="panel-body">
-										<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
-										<div id="esf22" class="col-sm-7" style="margin-top: 10px;">
-											<input type="range" min="0" max="100" onchange="sincEsf(22); partidaActual.equipos[1].corredores[1].esfuerzo = this.value"/>
-											<input type="text" disabled style="width: 35px;"/>%
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="agua22" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[1].agua = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="gluc22" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[1].azucar = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="grasa22" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[1].grasa = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="mts22" min="0" type="text" class="form-control" disabled/>
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<h4 class="panel-title" style="height: 30px;">
+											<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor23" data-parent="#team2">
+												<span class ="col-xs-4" id="cor23Nom">Corredor 1</span>
+												<div class="progress">
+													<div id="barra23" class=" progress-bar" style="width:0%;">
+														<span class="sr-only"></span>
+														<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
+													</div>
+												</div>
+											</span>
+										</h4>
+									</div>
+									<div id="collapseCor23" class="panel-collapse collapse">
+										<div class="panel-body">
+											<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+											<div id="esf23" class="col-sm-7" style="margin-bottom: 10px;">
+												<input type="range" min="0" max="100" onchange="sincEsf(23); partidaActual.equipos[1].corredores[2].esfuerzo = this.value"/>
+												<input type="text" disabled style="width: 35px;"/>%
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="agua23" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[2].agua = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="gluc23" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[2].azucar = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="grasa23" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[2].grasa = this.value"/>
+											</div>
+											<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
+											<div class="col-sm-6" style="margin-bottom: 10px;">
+												<input id="mts23" min="0" type="text" class="form-control" disabled/>
+											</div>
 										</div>
 									</div>
+								</div>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title" style="height: 30px;">
-										<span class="cursor collapsed" data-toggle="collapse" href="#collapseCor23" data-parent="#team2">
-											<span class ="col-xs-4" id="cor23Nom">Corredor 1</span>
-											<div class="progress">
-												<div id="barra23" class=" progress-bar" style="width:0%;">
-													<span class="sr-only"></span>
-													<img class="pull-right" src="img/bicicleta.svg" style="opacity: 0.4; height: 30px;"/>
-												</div>
-											</div>
-										</span>
-									</h4>
-								</div>
-								<div id="collapseCor23" class="panel-collapse collapse">
-									<div class="panel-body">
-										<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
-										<div id="esf23" class="col-sm-7" style="margin-top: 10px;">
-											<input type="range" min="0" max="100" onchange="sincEsf(23); partidaActual.equipos[1].corredores[2].esfuerzo = this.value"/>
-											<input type="text" disabled style="width: 35px;"/>%
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="agua23" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[2].agua = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="gluc23" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[2].azucar = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="grasa23" min="0" type="number" class="form-control" onchange="partidaActual.equipos[1].corredores[2].grasa = this.value"/>
-										</div>
-										<label class="col-sm-3 control-label col-sm-offset-1" style="font-size: .8em;">Mts. maximos por turno</label>
-										<div class="col-sm-6" style="margin-top: 10px;">
-											<input id="mts23" min="0" type="text" class="form-control" disabled/>
-										</div>
+							<div class="tab-pane" id="ordeqp2">
+								<div class="panel-body">
+									<label class="col-sm-3 control-label col-sm-offset-1">Esfuerzo</label>
+									<div id="esf2" class="col-sm-7" style="margin-bottom: 10px;">
+										<input type="range" min="0" max="100" onchange="sincEsf(2);"/>
+										<input type="text" disabled style="width: 35px;"/>%
+									</div>
+									<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+									<div class="col-sm-6" style="margin-bottom: 10px;">
+										<input id="agua2" min="0" type="number" class="form-control" onchange=""/>
+									</div>
+									<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+									<div class="col-sm-6" style="margin-bottom: 10px;">
+										<input id="gluc2" min="0" type="number" class="form-control" onchange=""/>
+									</div>
+									<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+									<div class="col-sm-6" style="margin-bottom: 10px;">
+										<input id="grasa2" min="0" type="number" class="form-control" onchange=""/>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>	
-			
+			</div>
 		</div>
-
 	</body>
 </html>

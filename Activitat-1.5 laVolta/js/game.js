@@ -38,39 +38,39 @@ function actualiza(){
 
 	$('#esf11 input[type="range"]').val(partidaActual.equipos[0].corredores[0].esfuerzo);
 	sincEsf(11);
-	$(agua11).val(partidaActual.equipos[0].corredores[0].agua);
-	$(gluc11).val(partidaActual.equipos[0].corredores[0].azucar);
-	$(grasa11).val(partidaActual.equipos[0].corredores[0].grasa);
+	$('#agua11').val(partidaActual.equipos[0].corredores[0].agua);
+	$('#gluc11').val(partidaActual.equipos[0].corredores[0].azucar);
+	$('#grasa11').val(partidaActual.equipos[0].corredores[0].grasa);
 
 	$('#esf12 input[type="range"]').val(partidaActual.equipos[0].corredores[1].esfuerzo);
 	sincEsf(12);
-	$(agua12).val(partidaActual.equipos[0].corredores[1].agua);
-	$(gluc12).val(partidaActual.equipos[0].corredores[1].azucar);
-	$(grasa12).val(partidaActual.equipos[0].corredores[1].grasa);
+	$('#agua12').val(partidaActual.equipos[0].corredores[1].agua);
+	$('#gluc12').val(partidaActual.equipos[0].corredores[1].azucar);
+	$('#grasa12').val(partidaActual.equipos[0].corredores[1].grasa);
 
 	$('#esf13 input[type="range"]').val(partidaActual.equipos[0].corredores[2].esfuerzo);
 	sincEsf(13);
-	$(agua13).val(partidaActual.equipos[0].corredores[2].agua);
-	$(gluc13).val(partidaActual.equipos[0].corredores[2].azucar);
-	$(grasa13).val(partidaActual.equipos[0].corredores[2].grasa);
+	$('#agua13').val(partidaActual.equipos[0].corredores[2].agua);
+	$('#gluc13').val(partidaActual.equipos[0].corredores[2].azucar);
+	$('#grasa13').val(partidaActual.equipos[0].corredores[2].grasa);
 
 	$('#esf21 input[type="range"]').val(partidaActual.equipos[1].corredores[0].esfuerzo);
 	sincEsf(21);
-	$(agua21).val(partidaActual.equipos[1].corredores[0].agua);
-	$(gluc21).val(partidaActual.equipos[1].corredores[0].azucar);
-	$(grasa21).val(partidaActual.equipos[1].corredores[0].grasa);
+	$('#agua21').val(partidaActual.equipos[1].corredores[0].agua);
+	$('#gluc21').val(partidaActual.equipos[1].corredores[0].azucar);
+	$('#grasa21').val(partidaActual.equipos[1].corredores[0].grasa);
 
 	$('#esf22 input[type="range"]').val(partidaActual.equipos[1].corredores[1].esfuerzo);
 	sincEsf(22);
-	$(agua22).val(partidaActual.equipos[1].corredores[1].agua);
-	$(gluc22).val(partidaActual.equipos[1].corredores[1].azucar);
-	$(grasa22).val(partidaActual.equipos[1].corredores[1].grasa);
+	$('#agua22').val(partidaActual.equipos[1].corredores[1].agua);
+	$('#gluc22').val(partidaActual.equipos[1].corredores[1].azucar);
+	$('#grasa22').val(partidaActual.equipos[1].corredores[1].grasa);
 
 	$('#esf23 input[type="range"]').val(partidaActual.equipos[1].corredores[2].esfuerzo);
 	sincEsf(23);
-	$(agua23).val(partidaActual.equipos[1].corredores[2].agua);
-	$(gluc23).val(partidaActual.equipos[1].corredores[2].azucar);
-	$(grasa23).val(partidaActual.equipos[1].corredores[2].grasa);
+	$('#agua23').val(partidaActual.equipos[1].corredores[2].agua);
+	$('#gluc23').val(partidaActual.equipos[1].corredores[2].azucar);
+	$('#grasa23').val(partidaActual.equipos[1].corredores[2].grasa);
 
 	$("#bolsa1 .agua").text(partidaActual.equipos[0].bolsa.agua);
 	$("#bolsa1 .grasa").text(partidaActual.equipos[0].bolsa.grasa);
@@ -96,13 +96,19 @@ function distancia(eqp, corr){
 	}
 }
 
-function pasaTurno(){
-	distancia(0,0);
-	distancia(0,1);
-	distancia(0,2);
-	distancia(1,0);
-	distancia(1,1);
-	distancia(1,2);
-	actualiza();
-	console.log(partidaActual);
+function pasaTurno(thisBut){
+	thisBut.disabled = true;
+	if($('#btn1').prop("disabled") && $('#btn2').prop("disabled"))
+	{
+		distancia(0,0);
+		distancia(0,1);
+		distancia(0,2);
+		distancia(1,0);
+		distancia(1,1);
+		distancia(1,2);
+		actualiza();
+		$('#btn1').prop("disabled",false);
+		$('#btn2').prop("disabled",false);
+	}
+	//console.log(partidaActual);
 }

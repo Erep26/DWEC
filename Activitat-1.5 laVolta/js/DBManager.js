@@ -96,6 +96,16 @@ function borra(partida){
   }
 }
 
+function removeAll(){
+  var request = window.indexedDB.deleteDatabase("laVolta");
+    request.onsuccess = function() {
+        $.bootstrapGrowl("Base de datos borrada!");
+    };
+    request.onerror = function(event) {
+        $.bootstrapGrowl("No se pudo borrar la base de datos");
+    };
+}
+
 function buscaPartida(callback){
   var trans= db.transaction(["partidas"],"readwrite");
   var store= trans.objectStore("partidas");

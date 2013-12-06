@@ -1,0 +1,79 @@
+#barra11{
+	background-color: #f38f2a!important;
+}
+#barra12{
+	background-color: #eae83d!important;
+}
+#barra13{
+	background-color: #b7565a!important;
+}
+#barra21{
+	background-color: #88ca71!important;
+}
+#barra22{
+	background-color: #d477e8!important;
+}
+#barra23{
+	background-color: #6699cc!important;
+}
+
+.cursor{
+	cursor: pointer;
+}
+
+.progress{
+	height: 30px;
+	background-color: #E2DCDC;
+}
+
+
+#equipo1 {
+  border-color: #ebccd1;
+}
+
+#equipo1 > .panel-heading {
+  color: #FFFFFF;
+  background-color: #CD482E;
+  border-color: #CD482E;
+}
+
+#equipo1 > .panel-heading + .panel-collapse .panel-body {
+  border-top-color: #ebccd1;
+}
+
+#equipo1 > .panel-heading > .dropdown .caret {
+  border-color: #CD482E transparent;
+}
+
+#equipo1 > .panel-footer + .panel-collapse .panel-body {
+  border-bottom-color: #CD482E;
+}
+
+.agua, .grasa, .azucar {
+	width: 50px;
+	height: 30px;
+	float: left;
+	font-size: .8em;
+	text-align: right;
+	/*border: 1px solid black;*/
+}
+
+.agua {
+	width: 35px;
+	background-image: url(../img/recursos/agua.png);
+	background-size:contain;
+	background-repeat: no-repeat;
+}
+
+.grasa {
+	margin-left: 8px;
+	background-image: url(../img/recursos/chuleta.png);
+	background-size:contain;
+	background-repeat: no-repeat;
+}
+
+.azucar {
+	background-image: url(../img/recursos/chocolate.png);
+	background-size:contain;
+	background-repeat: no-repeat;
+}

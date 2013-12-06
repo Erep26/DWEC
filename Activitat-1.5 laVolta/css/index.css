@@ -1,46 +1,44 @@
-#barra11{
-	background-color: #f0ad4e!important;
-}
-#barra12{
-	background-color: #F09904!important;
-}
-#barra13{
-	background-color: #F07704!important;
-}
-#barra21{
-	background-color: #42CACA!important;
-}
-#barra22{
-	background-color: #42B1CA!important;
-}
-#barra23{
-	background-color: #4294CA!important;
+body{
+	top:  0px!important;
+	margin: 0px!important;
+	padding: 0px!important;
+	border: 0px!important;
+	position: absolute!important;
+	width: 100%!important;
+	height: 100%!important;
 }
 
 
-.progress{
-	height: 30px;
+header{
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 150px;
+	position: absolute;
+	background-color: #A18BCD;
 }
 
-
-#equipo1 {
-  border-color: #ebccd1;
+#botones{
+	width: 300px;
+	margin-top: 180px;
+	margin-left: auto;
+	margin-right: auto;
+	top: 50%;
 }
 
-#equipo1 > .panel-heading {
-  color: #FFFFFF;
-  background-color: #CD482E;
-  border-color: #CD482E;
+label{
+	line-height: normal;
+	margin-left: 0px;
 }
 
-#equipo1 > .panel-heading + .panel-collapse .panel-body {
-  border-top-color: #ebccd1;
+.form-horizontal .control-label{
+	text-align: left!important;
+	padding-left: 10px;
 }
 
-#equipo1 > .panel-heading > .dropdown .caret {
-  border-color: #CD482E transparent;
+#bodyModal{
+	padding-bottom: 0px;
 }
-
-#equipo1 > .panel-footer + .panel-collapse .panel-body {
-  border-bottom-color: #CD482E;
+#footerModal{
+	margin-top: 0px;
 }

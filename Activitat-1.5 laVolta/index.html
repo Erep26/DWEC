@@ -1,75 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 	<head>
 		<title>La Volta</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" href="css/index.css" />
-		<script type="text/javascript" src="js/parallax.js"></script>
+		<link rel="stylesheet" href="css/game.css" />
 		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
-
+		<script type="text/javascript" src="js/bootstrapGrowl.min.js"></script>
+		<script type="text/javascript" src="js/DBManager.js"></script>
+		<script type="text/javascript" src="js/gameMenu.js"></script>
+		<script type="text/javascript" src="js/partidas.js"></script>
 	</head>
 
-	<body>
-		<div class="container">
-			<canvas id="miCanvas" width="1000px" height="400px" style="border: solid 1px black; top: 0px; left: 0px;"> navegador no compatible</canvas>
-
-			<div id="equipo1" class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">Equipo 1</h3>
-        		</div>
-				<div class="panel-body">
-					<div>Corredor 1</div>
-					<div class="progress">
-						<div id="barra11" class=" progress-bar" style="width:50%;">
-							<span class="sr-only"></span>
-							<img class="pull-right" src="img/Flaticon_16704.svg" style="opacity: 0.4; height: 30px;"/>
-						</div>
-					</div>
-					<div class="progress">
-						<div id="barra12" class=" progress-bar" style="width:50%;">
-							<span class="sr-only"></span>
-							<img class="pull-right" src="img/Flaticon_16704.svg" style="opacity: 0.4; height: 30px;"/>
-						</div>
-					</div>
-					<div class="progress">
-						<div id="barra13" class=" progress-bar" style="width:50%;">
-							<span class="sr-only"></span>
-							<img class="pull-right" src="img/Flaticon_16704.svg" style="opacity: 0.4; height: 30px;"/>
-						</div>
-					</div>
-					
-				</div>
-			</div>
-			<div id="equipo2" class="panel panel-primary">
-				<div class="panel-heading">
-					<h3 class="panel-title">Equipo 2</h3>
-        		</div>
-				<div class="panel-body">
-					
-					<div class="progress">
-						<div id="barra21" class=" progress-bar" style="width:50%;">
-							<span class="sr-only"></span>
-							<img class="pull-right" src="img/Flaticon_16704.svg" style="opacity: 0.4; height: 30px;"/>
-						</div>
-					</div>
-					<div class="progress">
-						<div id="barra22" class=" progress-bar" style="width:50%;">
-							<span class="sr-only"></span>
-							<img class="pull-right" src="img/Flaticon_16704.svg" style="opacity: 0.4; height: 30px;"/>
-						</div>
-					</div>
-					<div class="progress">
-						<div id="barra23" class=" progress-bar" style="width:50%;">
-							<span class="sr-only"></span>
-							<img class="pull-right" src="img/Flaticon_16704.svg" style="opacity: 0.4; height: 30px;"/>
-						</div>
-					</div>
-
-				</div>
-			</div>
-			
-			
+	<body class="jumbotron">
+		<header>
+			<h1>La Volta</h1>
+		</header>
+		<div id="botones">
+			<p><button class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#myModal" onclick="newGame();">Nueva Partida</button></p>
+			<p><button class="btn btn-lg btn-block btn-primary" data-toggle="modal" data-target="#myModal" onclick="loadGame();">Cargar Partida</button></p>
+			<p><button class="btn btn-lg btn-block btn-danger" data-toggle="modal" data-target="#myModal" onclick="removeGame();">Borrar Partida</button></p>
 		</div>
+
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+		  <div style="width: 65%;" class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="headerModal"></h4>
+		      </div>
+		      <form id="myForm" class="form-horizontal" role="form">
+			      <div class="modal-body" id="bodyModal"></div>
+			      <div class="modal-footer" id="footerModal"></div>
+			  </form>
+		    </div>
+		  </div>
+		</div>
+
+
 	</body>
 </html>

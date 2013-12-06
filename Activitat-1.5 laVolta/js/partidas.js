@@ -1,0 +1,88 @@
+var partidaActual = {
+				partida:"",
+				selected:"true",
+				metrosMax:5000,
+				equipos:[
+					{
+						nombre:"",
+						corredores:[
+							{
+								nombre:"Corredor 11",
+								tipo:"",
+								posicion:0,
+								agua:0,
+								grasa:0,
+								azucar:0,
+								esfuerzo:100,
+								mtsMax:0
+							},
+							{
+								nombre:"Corredor 12",
+								tipo:"",
+								posicion:0,
+								agua:0,
+								grasa:0,
+								azucar:0,
+								esfuerzo:100,
+								mtsMax:0
+							},
+							{
+								nombre:"Corredor 13",
+								tipo:"",
+								posicion:0,
+								agua:0,
+								grasa:0,
+								azucar:0,
+								esfuerzo:100,
+								mtsMax:0
+							}
+						],
+						bolsa:{
+								agua:165,
+								grasa:165,
+								azucar:165
+						}
+					},
+					{
+						nombre:"",
+						corredores:[
+							{
+								nombre:"Corredor 21",
+								tipo:"",
+								posicion:0,
+								agua:0,
+								grasa:0,
+								azucar:0,
+								esfuerzo:100,
+								mtsMax:0
+							},
+							{
+								nombre:"Corredor 22",
+								tipo:"",
+								posicion:0,
+								agua:0,
+								grasa:0,
+								azucar:0,
+								esfuerzo:100,
+								mtsMax:0
+							},
+							{
+								nombre:"Corredor 23",
+								tipo:"",
+								posicion:0,
+								agua:0,
+								grasa:0,
+								azucar:0,
+								esfuerzo:100,
+								mtsMax:0
+							}
+						],
+						bolsa:{
+								agua:165,
+								grasa:165,
+								azucar:165
+						}
+					}
+					]
+}
+//console.log(jsonVolta);

@@ -1,6 +1,6 @@
-setTimeout(function(){buscaPartida(function(){
+/*setTimeout(function(){buscaPartida(function(){
 	partidaCargada()
-});}, 100);
+});}, 100);*/
 
 function partidaCargada(){
 	//console.log(partidaActual);

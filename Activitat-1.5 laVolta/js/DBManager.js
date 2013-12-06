@@ -26,6 +26,9 @@
         openRequest.onsuccess = function(e) {
             //console.log("Success!");
             db = e.target.result;
+            var pag = window.location.pathname;
+            pag = pag.substring(pag.lastIndexOf('/') + 1);
+            if(pag=="game.html") buscaPartida(function(){partidaCargada()});
         }
  
         openRequest.onerror = function(e) {

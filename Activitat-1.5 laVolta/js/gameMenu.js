@@ -10,15 +10,15 @@ window.onload = function(){
 	myForm = document.getElementById("myForm");
 }
 
-function puntos(thisNum, equipo){
-		var repartidos = parseInt($("#mts"+equipo+"1").val()) + parseInt($("#mts"+equipo+"2").val()) + parseInt($("#mts"+equipo+"3").val());
-		var mts = 1000 - repartidos;
-		if(mts < 0){
-			thisNum.value--;
-			return false;
-		}
-		$("#pntRep"+equipo).text(mts);
+function puntos(thisNum, equipo){//exactamente igual que aguaUp(), ver en game.js
+	var repartidos = parseInt($("#mts"+equipo+"1").val()) + parseInt($("#mts"+equipo+"2").val()) + parseInt($("#mts"+equipo+"3").val());
+	$("#pntRep"+equipo).text(1000 - repartidos);
+	if(parseInt($("#pntRep"+equipo).text()) < 0){
+		thisNum.value = parseInt(thisNum.value) + parseInt($("#pntRep"+equipo).text());
+		repartidos = parseInt($("#mts"+equipo+"1").val()) + parseInt($("#mts"+equipo+"2").val()) + parseInt($("#mts"+equipo+"3").val());
+		$("#pntRep"+equipo).text(1000 - repartidos);
 	}
+}
 
 function newGame(){
 	myForm.onsubmit = function(){
@@ -69,7 +69,7 @@ function newGame(){
 				'</div>'+
 				'<label class="col-sm-5 control-label col-sm-offset-1" style="font-size: .8em;">Metros maximos por turno</label>'+
 				'<div class="col-sm-5" style="margin-top: 10px;">'+
-					'<input onchange="puntos(this, '+parseInt(ncor/10)+');" onkeypress="return false;" min="0" id="mts'+ncor+'" name="mts'+ncor+'" type="number" value="333" class="form-control"></input>'+
+					'<input onchange="puntos(this, '+parseInt(ncor/10)+');" min="0" id="mts'+ncor+'" name="mts'+ncor+'" type="number" value="333" class="form-control"></input>'+
 				'</div>'+
 
 				'<label class="pull-left col-sm-5 control-label col-sm-offset-1" style="clear: both;">Tipo</label>'+

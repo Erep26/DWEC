@@ -16,9 +16,6 @@ function partidaCargada(){
 	}
 	lee();
 	iniAnim();
-	$('input[type="number"]').keypress(function(){
-		return false;
-	});
 }
 
 
@@ -54,27 +51,56 @@ function sincGrasa(equipo, thisValue){
 }
 
 function aguaUp(e, inpt){
+	// agua = suma de la agua de los corredores
 	var agua = parseInt($("#agua"+e+"1 input[type='number']").val()) + parseInt($("#agua"+e+"2 input[type='number']").val()) + parseInt($("#agua"+e+"3 input[type='number']").val());
-	if(partidaActual.equipos[e-1].bolsa.agua - agua >= 0)
+	//mostrmos el agua que tenemos = agua en bolsa - agua de los corredores
+	$("#bolsa"+(e)+" .agua").text(partidaActual.equipos[e-1].bolsa.agua - agua);
+	//Si el agua en bolsa es negativa
+	if(parseInt($("#bolsa"+(e)+" .agua").text()) < 0)
+	{
+		if(inpt.id){//orden de equipo
+			//agua del control que estamos modificando es = agua del input + agua en bolsa que en el momento de la operacion es negativa y / tres por que afecta a 3 corredores
+			inpt.value = parseInt(parseInt(inpt.value) + parseInt($("#bolsa"+e+" .agua").text())/3);
+			//como es una orden de equipo sincronizamos esta con todos los corredores
+			sincAgua(e, inpt.value);
+		}
+		else//orden de corredor
+			inpt.value = parseInt(inpt.value) + parseInt($("#bolsa"+e+" .agua").text());//igual que la orden de equipo pero sin dividir por 3
+		//recalculamos el agua;
+		agua = parseInt($("#agua"+e+"1 input[type='number']").val()) + parseInt($("#agua"+e+"2 input[type='number']").val()) + parseInt($("#agua"+e+"3 input[type='number']").val());
+		//mostramos el nuevo valor
 		$("#bolsa"+(e)+" .agua").text(partidaActual.equipos[e-1].bolsa.agua - agua);
-	else
-		inpt.value -= 1;
+	}
 }
 
-function glucUp(e, inpt){
+function glucUp(e, inpt){//exactamente igual que aguaUp()
 	var gluc = parseInt($("#gluc"+e+"1 input[type='number']").val()) + parseInt($("#gluc"+e+"2 input[type='number']").val()) + parseInt($("#gluc"+e+"3 input[type='number']").val());
-	if(partidaActual.equipos[e-1].bolsa.azucar - gluc >= 0)
+	$("#bolsa"+(e)+" .azucar").text(partidaActual.equipos[e-1].bolsa.azucar - gluc);
+	if(parseInt($("#bolsa"+(e)+" .azucar").text()) < 0)
+	{
+		if(inpt.id){
+			inpt.value = parseInt(parseInt(inpt.value) + parseInt($("#bolsa"+e+" .azucar").text())/3);
+			sincGluccosa(e, inpt.value);
+		}
+		else inpt.value = parseInt(inpt.value) + parseInt($("#bolsa"+e+" .azucar").text());
+		gluc = parseInt($("#gluc"+e+"1 input[type='number']").val()) + parseInt($("#gluc"+e+"2 input[type='number']").val()) + parseInt($("#gluc"+e+"3 input[type='number']").val());
 		$("#bolsa"+(e)+" .azucar").text(partidaActual.equipos[e-1].bolsa.azucar - gluc);
-	else
-		inpt.value -= 1;
+	}
 }
 
-function grasaUp(e, inpt){
+function grasaUp(e, inpt){//exactamente igual que aguaUp()
 	var grasa = parseInt($("#grasa"+e+"1 input[type='number']").val()) + parseInt($("#grasa"+e+"2 input[type='number']").val()) + parseInt($("#grasa"+e+"3 input[type='number']").val());
-	if(partidaActual.equipos[e-1].bolsa.grasa - grasa >= 0)
+	$("#bolsa"+(e)+" .grasa").text(partidaActual.equipos[e-1].bolsa.grasa - grasa);
+	if(parseInt($("#bolsa"+(e)+" .grasa").text()) < 0)
+	{
+		if(inpt.id){
+			inpt.value = parseInt(parseInt(inpt.value) + parseInt($("#bolsa"+e+" .grasa").text())/3);
+			sincGrasa(e, inpt.value);
+		}
+		else inpt.value = parseInt(inpt.value) + parseInt($("#bolsa"+e+" .grasa").text());
+		grasa = parseInt($("#grasa"+e+"1 input[type='number']").val()) + parseInt($("#grasa"+e+"2 input[type='number']").val()) + parseInt($("#grasa"+e+"3 input[type='number']").val());
 		$("#bolsa"+(e)+" .grasa").text(partidaActual.equipos[e-1].bolsa.grasa - grasa);
-	else
-		inpt.value -= 1;
+	}
 }
 
 function lee(){
@@ -149,6 +175,7 @@ function pasaTurno(thisBut){
 		lee();
 		$('#btn1').prop("disabled",false);
 		$('#btn2').prop("disabled",false);
+		write("update", function(){});
 		if(gndr) alert("Tenemos un ganador!!!");
 	}
 	//console.log(partidaActual);

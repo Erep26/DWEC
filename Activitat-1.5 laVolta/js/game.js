@@ -1,114 +1,155 @@
-/*setTimeout(function(){buscaPartida(function(){
-	partidaCargada()
-});}, 100);*/
-
 function partidaCargada(){
 	//console.log(partidaActual);
+	for(var e = 0; e < 2; e++){
+		for (var c = 0; c < 3; c++) {
+			var ec = ((e+1)*10)+(c+1);
+			//Nombre y tipo
+			document.getElementById("cor"+ec+"Nom").innerHTML = partidaActual.equipos[e].corredores[c].nombre+"<br/>"+partidaActual.equipos[e].corredores[c].tipo;
+			//Esfuerzo
+			$('#esf'+ec+' input[type="range"]').val(partidaActual.equipos[e].corredores[c].esfuerzo);
+			sincEsf(ec);
+			//Mts Maximos por turno
+			$("#mts"+ec).val(partidaActual.equipos[e].corredores[c].mtsMax);
+		}
+		//Nombres equipos
+		$("#eqp"+(e+1)).text(partidaActual.equipos[e].nombre);
+	}
+	lee();
 	iniAnim();
-	actualiza();
-	document.getElementById("cor11Nom").innerHTML = partidaActual.equipos[0].corredores[0].nombre+"<br/>"+partidaActual.equipos[0].corredores[0].tipo;
-	document.getElementById("cor12Nom").innerHTML = partidaActual.equipos[0].corredores[1].nombre+"<br/>"+partidaActual.equipos[0].corredores[1].tipo;
-	document.getElementById("cor13Nom").innerHTML = partidaActual.equipos[0].corredores[2].nombre+"<br/>"+partidaActual.equipos[0].corredores[2].tipo;
-	document.getElementById("cor21Nom").innerHTML = partidaActual.equipos[1].corredores[0].nombre+"<br/>"+partidaActual.equipos[1].corredores[0].tipo;
-	document.getElementById("cor22Nom").innerHTML = partidaActual.equipos[1].corredores[1].nombre+"<br/>"+partidaActual.equipos[1].corredores[1].tipo;
-	document.getElementById("cor23Nom").innerHTML = partidaActual.equipos[1].corredores[2].nombre+"<br/>"+partidaActual.equipos[1].corredores[2].tipo;
-
-	$("#mts11").val(partidaActual.equipos[0].corredores[0].mtsMax);
-	$("#mts12").val(partidaActual.equipos[0].corredores[1].mtsMax);
-	$("#mts13").val(partidaActual.equipos[0].corredores[2].mtsMax);
-	$("#mts21").val(partidaActual.equipos[1].corredores[0].mtsMax);
-	$("#mts22").val(partidaActual.equipos[1].corredores[1].mtsMax);
-	$("#mts23").val(partidaActual.equipos[1].corredores[2].mtsMax);
-
-	$("#eqp1").text(partidaActual.equipos[0].nombre);
-	$("#eqp2").text(partidaActual.equipos[1].nombre);
+	$('input[type="number"]').keypress(function(){
+		return false;
+	});
 }
+
 
 function sincEsf(corr){
 	$('#esf'+corr+' input[type="text"]').val($('#esf'+corr+' input[type="range"]').val());
-}
-
-function actualiza(){
-	$("#barra11").css("width", partidaActual.equipos[0].corredores[0].posicion / partidaActual.metrosMax * 100+"%");
-	$("#barra12").css("width", partidaActual.equipos[0].corredores[1].posicion / partidaActual.metrosMax * 100+"%");
-	$("#barra13").css("width", partidaActual.equipos[0].corredores[2].posicion / partidaActual.metrosMax * 100+"%");
-	$("#barra21").css("width", partidaActual.equipos[1].corredores[0].posicion / partidaActual.metrosMax * 100+"%");
-	$("#barra22").css("width", partidaActual.equipos[1].corredores[1].posicion / partidaActual.metrosMax * 100+"%");
-	$("#barra23").css("width", partidaActual.equipos[1].corredores[2].posicion / partidaActual.metrosMax * 100+"%");
-
-	$('#esf11 input[type="range"]').val(partidaActual.equipos[0].corredores[0].esfuerzo);
-	sincEsf(11);
-	$('#agua11').val(partidaActual.equipos[0].corredores[0].agua);
-	$('#gluc11').val(partidaActual.equipos[0].corredores[0].azucar);
-	$('#grasa11').val(partidaActual.equipos[0].corredores[0].grasa);
-
-	$('#esf12 input[type="range"]').val(partidaActual.equipos[0].corredores[1].esfuerzo);
-	sincEsf(12);
-	$('#agua12').val(partidaActual.equipos[0].corredores[1].agua);
-	$('#gluc12').val(partidaActual.equipos[0].corredores[1].azucar);
-	$('#grasa12').val(partidaActual.equipos[0].corredores[1].grasa);
-
-	$('#esf13 input[type="range"]').val(partidaActual.equipos[0].corredores[2].esfuerzo);
-	sincEsf(13);
-	$('#agua13').val(partidaActual.equipos[0].corredores[2].agua);
-	$('#gluc13').val(partidaActual.equipos[0].corredores[2].azucar);
-	$('#grasa13').val(partidaActual.equipos[0].corredores[2].grasa);
-
-	$('#esf21 input[type="range"]').val(partidaActual.equipos[1].corredores[0].esfuerzo);
-	sincEsf(21);
-	$('#agua21').val(partidaActual.equipos[1].corredores[0].agua);
-	$('#gluc21').val(partidaActual.equipos[1].corredores[0].azucar);
-	$('#grasa21').val(partidaActual.equipos[1].corredores[0].grasa);
-
-	$('#esf22 input[type="range"]').val(partidaActual.equipos[1].corredores[1].esfuerzo);
-	sincEsf(22);
-	$('#agua22').val(partidaActual.equipos[1].corredores[1].agua);
-	$('#gluc22').val(partidaActual.equipos[1].corredores[1].azucar);
-	$('#grasa22').val(partidaActual.equipos[1].corredores[1].grasa);
-
-	$('#esf23 input[type="range"]').val(partidaActual.equipos[1].corredores[2].esfuerzo);
-	sincEsf(23);
-	$('#agua23').val(partidaActual.equipos[1].corredores[2].agua);
-	$('#gluc23').val(partidaActual.equipos[1].corredores[2].azucar);
-	$('#grasa23').val(partidaActual.equipos[1].corredores[2].grasa);
-
-	$("#bolsa1 .agua").text(partidaActual.equipos[0].bolsa.agua);
-	$("#bolsa1 .grasa").text(partidaActual.equipos[0].bolsa.grasa);
-	$("#bolsa1 .azucar").text(partidaActual.equipos[0].bolsa.azucar);
-
-	$("#bolsa2 .agua").text(partidaActual.equipos[1].bolsa.agua);
-	$("#bolsa2 .grasa").text(partidaActual.equipos[1].bolsa.grasa);
-	$("#bolsa2 .azucar").text(partidaActual.equipos[1].bolsa.azucar);
-}
-
-function distancia(eqp, corr){
-	var c = partidaActual.equipos[eqp].corredores[corr]; // esto sirve como una especie de namespace
-	//Distancia = %Esfuerzo * MetrosMaximosPorTurno
-	if(c.esfuerzo!=0 && c.agua!=0 && c.grasa!=0 && c.azucar!=0)
-	{
-		c.posicion += parseInt(c.esfuerzo/100 * c.mtsMax);
-		//Gasto Agua = (%Esfuerzo * 100)
-		c.agua -= c.esfuerzo;
-		//Gasto Grasa = 100 -(%Esfuerzo * 100)
-		c.grasa -= (100 - c.esfuerzo);
-		//Gasto Azucar = %Esfuerzo * 10
-		c.azucar -= parseInt(c.esfuerzo/10);
+	if(parseInt(corr/10) == 0){
+		$('#esf'+corr+'1 input[type="text"]').val($('#esf'+corr+' input[type="range"]').val());
+		$('#esf'+corr+'2 input[type="text"]').val($('#esf'+corr+' input[type="range"]').val());
+		$('#esf'+corr+'3 input[type="text"]').val($('#esf'+corr+' input[type="range"]').val());
+		partidaActual.equipos[corr].corredores[0].esfuerzo = $('#esf'+corr+' input[type="text"]').val();
+		partidaActual.equipos[corr].corredores[1].esfuerzo = $('#esf'+corr+' input[type="text"]').val();
+		partidaActual.equipos[corr].corredores[2].esfuerzo = $('#esf'+corr+' input[type="text"]').val();
 	}
+	else partidaActual.equipos[parseInt(corr/10)-1].corredores[parseInt(corr%10)-1].esfuerzo = $('#esf'+corr+' input[type="text"]').val();
+}
+
+function sincAgua(equipo, thisValue){
+	$('#agua'+equipo+'1 input[type="number"]').val(thisValue);
+	$('#agua'+equipo+'2 input[type="number"]').val(thisValue);
+	$('#agua'+equipo+'3 input[type="number"]').val(thisValue);
+}
+
+function sincGluccosa(equipo, thisValue){
+	$('#gluc'+equipo+'1 input[type="number"]').val(thisValue);
+	$('#gluc'+equipo+'2 input[type="number"]').val(thisValue);
+	$('#gluc'+equipo+'3 input[type="number"]').val(thisValue);
+}
+
+function sincGrasa(equipo, thisValue){
+	$('#grasa'+equipo+'1 input[type="number"]').val(thisValue);
+	$('#grasa'+equipo+'2 input[type="number"]').val(thisValue);
+	$('#grasa'+equipo+'3 input[type="number"]').val(thisValue);
+}
+
+function aguaUp(e, inpt){
+	var agua = parseInt($("#agua"+e+"1 input[type='number']").val()) + parseInt($("#agua"+e+"2 input[type='number']").val()) + parseInt($("#agua"+e+"3 input[type='number']").val());
+	if(partidaActual.equipos[e-1].bolsa.agua - agua >= 0)
+		$("#bolsa"+(e)+" .agua").text(partidaActual.equipos[e-1].bolsa.agua - agua);
+	else
+		inpt.value -= 1;
+}
+
+function glucUp(e, inpt){
+	var gluc = parseInt($("#gluc"+e+"1 input[type='number']").val()) + parseInt($("#gluc"+e+"2 input[type='number']").val()) + parseInt($("#gluc"+e+"3 input[type='number']").val());
+	if(partidaActual.equipos[e-1].bolsa.azucar - gluc >= 0)
+		$("#bolsa"+(e)+" .azucar").text(partidaActual.equipos[e-1].bolsa.azucar - gluc);
+	else
+		inpt.value -= 1;
+}
+
+function grasaUp(e, inpt){
+	var grasa = parseInt($("#grasa"+e+"1 input[type='number']").val()) + parseInt($("#grasa"+e+"2 input[type='number']").val()) + parseInt($("#grasa"+e+"3 input[type='number']").val());
+	if(partidaActual.equipos[e-1].bolsa.grasa - grasa >= 0)
+		$("#bolsa"+(e)+" .grasa").text(partidaActual.equipos[e-1].bolsa.grasa - grasa);
+	else
+		inpt.value -= 1;
+}
+
+function lee(){
+	for(var e = 0; e < 2; e++){
+		for (var c = 0; c < 3; c++) {
+			var ec = ((e+1)*10)+(c+1);
+			//Barras de posicion
+			$("#barra"+ec).css("width", partidaActual.equipos[e].corredores[c].posicion / partidaActual.metrosMax * 100+"%");
+			//Agua
+			$('#agua'+ec+' input[type="text"]').val(partidaActual.equipos[e].corredores[c].agua);
+			//Glucosa
+			$('#gluc'+ec+' input[type="text"]').val(partidaActual.equipos[e].corredores[c].azucar);
+			//Grasa
+			$('#grasa'+ec+' input[type="text"]').val(partidaActual.equipos[e].corredores[c].grasa);
+		}
+		//bolsas
+		$("#bolsa"+(e+1)+" .agua").text(partidaActual.equipos[e].bolsa.agua);
+		$("#bolsa"+(e+1)+" .grasa").text(partidaActual.equipos[e].bolsa.grasa);
+		$("#bolsa"+(e+1)+" .azucar").text(partidaActual.equipos[e].bolsa.azucar);
+	}
+}
+
+function escribe(){
+	for(var e = 0; e < 2; e++)
+		for (var c = 0; c < 3; c++) {
+			var ec = ((e+1)*10)+(c+1);
+			//Agua
+			partidaActual.equipos[e].corredores[c].agua += parseInt($('#agua'+ec+' input[type="number"]').val());
+			$('#agua'+ec+' input[type="number"]').val(0);
+			//Glucosa
+			partidaActual.equipos[e].corredores[c].azucar += parseInt($('#gluc'+ec+' input[type="number"]').val());
+			$('#gluc'+ec+' input[type="number"]').val(0);
+			//Grasa
+			partidaActual.equipos[e].corredores[c].grasa += parseInt($('#grasa'+ec+' input[type="number"]').val());
+			$('#grasa'+ec+' input[type="number"]').val(0);
+		}
+}
+
+function distancia(){
+	var ganador = false;
+	for(var e = 0; e < 2; e++)
+		for (var c = 0; c < 3; c++) {
+			var corr = partidaActual.equipos[e].corredores[c]; // esto sirve para acortar a corr
+			//Distancia = %Esfuerzo * MetrosMaximosPorTurno
+			if(corr.esfuerzo!=0 && corr.agua!=0 && corr.grasa!=0 && corr.azucar!=0)
+			{
+				corr.posicion += parseInt(corr.esfuerzo/100 * corr.mtsMax);
+				if(corr.posicion >= partidaActual.metrosMax){
+					corr.posicion = partidaActual.metrosMax;
+					ganador = true;
+				}
+				//Gasto Agua = (%Esfuerzo * 100)
+				corr.agua -= corr.esfuerzo;
+				if(corr.agua < 0) corr.agua = 0;
+				//Gasto Grasa = 100 -(%Esfuerzo * 100)
+				corr.grasa -= (100 - corr.esfuerzo);
+				if(corr.grasa < 0) corr.grasa = 0;
+				//Gasto Azucar = %Esfuerzo * 10
+				corr.azucar -= parseInt(corr.esfuerzo/10);
+				if(corr.azucar < 0) corr.azucar = 0;
+			}
+		}
+	return ganador;
 }
 
 function pasaTurno(thisBut){
 	thisBut.disabled = true;
 	if($('#btn1').prop("disabled") && $('#btn2').prop("disabled"))
 	{
-		distancia(0,0);
-		distancia(0,1);
-		distancia(0,2);
-		distancia(1,0);
-		distancia(1,1);
-		distancia(1,2);
-		actualiza();
+		escribe();
+		var gndr = distancia();
+		lee();
 		$('#btn1').prop("disabled",false);
 		$('#btn2').prop("disabled",false);
+		if(gndr) alert("Tenemos un ganador!!!");
 	}
 	//console.log(partidaActual);
 }

@@ -69,7 +69,7 @@ function newGame(){
 				'</div>'+
 				'<label class="col-sm-5 control-label col-sm-offset-1" style="font-size: .8em;">Metros maximos por turno</label>'+
 				'<div class="col-sm-5" style="margin-top: 10px;">'+
-					'<input onchange="puntos(this, '+parseInt(ncor/10)+');" min="0" id="mts'+ncor+'" name="mts'+ncor+'" type="number" value="333" class="form-control"></input>'+
+					'<input onchange="puntos(this, '+parseInt(ncor/10)+');" onkeypress="return false;" min="0" id="mts'+ncor+'" name="mts'+ncor+'" type="number" value="333" class="form-control"></input>'+
 				'</div>'+
 
 				'<label class="pull-left col-sm-5 control-label col-sm-offset-1" style="clear: both;">Tipo</label>'+
@@ -164,7 +164,7 @@ function newGame(){
 							'</div>';
 	footerModal.innerHTML = '<button type="submit" class="btn btn-default">Crear</button>';
 
-	$(".toltip").tooltip({placement: 'top'});
+	//$(".toltip").tooltip({placement: 'top'});
 }
 
 function loadGame(){

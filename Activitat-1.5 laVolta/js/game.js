@@ -54,52 +54,52 @@ function aguaUp(e, inpt){
 	// agua = suma de la agua de los corredores
 	var agua = parseInt($("#agua"+e+"1 input[type='number']").val()) + parseInt($("#agua"+e+"2 input[type='number']").val()) + parseInt($("#agua"+e+"3 input[type='number']").val());
 	//mostrmos el agua que tenemos = agua en bolsa - agua de los corredores
-	$("#bolsa"+(e)+" .agua").text(partidaActual.equipos[e-1].bolsa.agua - agua);
+	$(".bolsa"+(e)+" .agua").text(partidaActual.equipos[e-1].bolsa.agua - agua);
 	//Si el agua en bolsa es negativa
-	if(parseInt($("#bolsa"+(e)+" .agua").text()) < 0)
+	if(parseInt($(".bolsa"+(e)+" .agua").text()) < 0)
 	{
 		if(inpt.id){//orden de equipo
 			//agua del control que estamos modificando es = agua del input + agua en bolsa que en el momento de la operacion es negativa y / tres por que afecta a 3 corredores
-			inpt.value = parseInt(parseInt(inpt.value) + parseInt($("#bolsa"+e+" .agua").text())/3);
+			inpt.value = parseInt(parseInt(inpt.value) + parseInt($(".bolsa"+e+" .agua").text())/3);
 			//como es una orden de equipo sincronizamos esta con todos los corredores
 			sincAgua(e, inpt.value);
 		}
 		else//orden de corredor
-			inpt.value = parseInt(inpt.value) + parseInt($("#bolsa"+e+" .agua").text());//igual que la orden de equipo pero sin dividir por 3
+			inpt.value = parseInt(inpt.value) + parseInt($(".bolsa"+e+" .agua").text());//igual que la orden de equipo pero sin dividir por 3
 		//recalculamos el agua;
 		agua = parseInt($("#agua"+e+"1 input[type='number']").val()) + parseInt($("#agua"+e+"2 input[type='number']").val()) + parseInt($("#agua"+e+"3 input[type='number']").val());
 		//mostramos el nuevo valor
-		$("#bolsa"+(e)+" .agua").text(partidaActual.equipos[e-1].bolsa.agua - agua);
+		$(".bolsa"+(e)+" .agua").text(partidaActual.equipos[e-1].bolsa.agua - agua);
 	}
 }
 
 function glucUp(e, inpt){//exactamente igual que aguaUp()
 	var gluc = parseInt($("#gluc"+e+"1 input[type='number']").val()) + parseInt($("#gluc"+e+"2 input[type='number']").val()) + parseInt($("#gluc"+e+"3 input[type='number']").val());
-	$("#bolsa"+(e)+" .azucar").text(partidaActual.equipos[e-1].bolsa.azucar - gluc);
-	if(parseInt($("#bolsa"+(e)+" .azucar").text()) < 0)
+	$(".bolsa"+(e)+" .azucar").text(partidaActual.equipos[e-1].bolsa.azucar - gluc);
+	if(parseInt($(".bolsa"+(e)+" .azucar").text()) < 0)
 	{
 		if(inpt.id){
-			inpt.value = parseInt(parseInt(inpt.value) + parseInt($("#bolsa"+e+" .azucar").text())/3);
+			inpt.value = parseInt(parseInt(inpt.value) + parseInt($(".bolsa"+e+" .azucar").text())/3);
 			sincGluccosa(e, inpt.value);
 		}
-		else inpt.value = parseInt(inpt.value) + parseInt($("#bolsa"+e+" .azucar").text());
+		else inpt.value = parseInt(inpt.value) + parseInt($(".bolsa"+e+" .azucar").text());
 		gluc = parseInt($("#gluc"+e+"1 input[type='number']").val()) + parseInt($("#gluc"+e+"2 input[type='number']").val()) + parseInt($("#gluc"+e+"3 input[type='number']").val());
-		$("#bolsa"+(e)+" .azucar").text(partidaActual.equipos[e-1].bolsa.azucar - gluc);
+		$(".bolsa"+(e)+" .azucar").text(partidaActual.equipos[e-1].bolsa.azucar - gluc);
 	}
 }
 
 function grasaUp(e, inpt){//exactamente igual que aguaUp()
 	var grasa = parseInt($("#grasa"+e+"1 input[type='number']").val()) + parseInt($("#grasa"+e+"2 input[type='number']").val()) + parseInt($("#grasa"+e+"3 input[type='number']").val());
-	$("#bolsa"+(e)+" .grasa").text(partidaActual.equipos[e-1].bolsa.grasa - grasa);
-	if(parseInt($("#bolsa"+(e)+" .grasa").text()) < 0)
+	$(".bolsa"+(e)+" .grasa").text(partidaActual.equipos[e-1].bolsa.grasa - grasa);
+	if(parseInt($(".bolsa"+(e)+" .grasa").text()) < 0)
 	{
 		if(inpt.id){
-			inpt.value = parseInt(parseInt(inpt.value) + parseInt($("#bolsa"+e+" .grasa").text())/3);
+			inpt.value = parseInt(parseInt(inpt.value) + parseInt($(".bolsa"+e+" .grasa").text())/3);
 			sincGrasa(e, inpt.value);
 		}
-		else inpt.value = parseInt(inpt.value) + parseInt($("#bolsa"+e+" .grasa").text());
+		else inpt.value = parseInt(inpt.value) + parseInt($(".bolsa"+e+" .grasa").text());
 		grasa = parseInt($("#grasa"+e+"1 input[type='number']").val()) + parseInt($("#grasa"+e+"2 input[type='number']").val()) + parseInt($("#grasa"+e+"3 input[type='number']").val());
-		$("#bolsa"+(e)+" .grasa").text(partidaActual.equipos[e-1].bolsa.grasa - grasa);
+		$(".bolsa"+(e)+" .grasa").text(partidaActual.equipos[e-1].bolsa.grasa - grasa);
 	}
 }
 
@@ -117,14 +117,14 @@ function lee(){
 			$('#grasa'+ec+' input[type="text"]').val(partidaActual.equipos[e].corredores[c].grasa);
 		}
 		//bolsas
-		$("#bolsa"+(e+1)+" .agua").text(partidaActual.equipos[e].bolsa.agua);
-		$("#bolsa"+(e+1)+" .grasa").text(partidaActual.equipos[e].bolsa.grasa);
-		$("#bolsa"+(e+1)+" .azucar").text(partidaActual.equipos[e].bolsa.azucar);
+		$(".bolsa"+(e+1)+" .agua").text(partidaActual.equipos[e].bolsa.agua);
+		$(".bolsa"+(e+1)+" .grasa").text(partidaActual.equipos[e].bolsa.grasa);
+		$(".bolsa"+(e+1)+" .azucar").text(partidaActual.equipos[e].bolsa.azucar);
 	}
 }
 
 function escribe(){
-	for(var e = 0; e < 2; e++)
+	for(var e = 0; e < 2; e++){
 		for (var c = 0; c < 3; c++) {
 			var ec = ((e+1)*10)+(c+1);
 			//Agua
@@ -137,6 +137,10 @@ function escribe(){
 			partidaActual.equipos[e].corredores[c].grasa += parseInt($('#grasa'+ec+' input[type="number"]').val());
 			$('#grasa'+ec+' input[type="number"]').val(0);
 		}
+		partidaActual.equipos[e].bolsa.agua += parseInt($('#repAgua'+(e+1)).val());
+		partidaActual.equipos[e].bolsa.azucar += parseInt($('#repGluc'+(e+1)).val());
+		partidaActual.equipos[e].bolsa.grasa += parseInt($('#repGrasa'+(e+1)).val());
+	}
 }
 
 function distancia(){
@@ -166,15 +170,34 @@ function distancia(){
 	return ganador;
 }
 
-function pasaTurno(thisBut){
+function repartoBolsa(thisBut){
 	thisBut.disabled = true;
 	if($('#btn1').prop("disabled") && $('#btn2').prop("disabled"))
+	{
+		$('#repAgua1').val(0);
+		$('#repGluc1').val(0);
+		$('#repGrasa1').val(0);
+		$('#repAgua2').val(0);
+		$('#repGluc2').val(0);
+		$('#repGrasa2').val(0);
+		$('#ptsBolsa1').text("500");
+		$('#ptsBolsa2').text("500");
+		$("#myModal").modal('show');
+	}
+}
+
+function pasaTurno(thisBut){
+	thisBut.disabled = true;
+	if($('#butListo1').prop("disabled") && $('#butListo2').prop("disabled"))
 	{
 		escribe();
 		var gndr = distancia();
 		lee();
 		$('#btn1').prop("disabled",false);
 		$('#btn2').prop("disabled",false);
+		$('#butListo1').prop("disabled",false);
+		$('#butListo2').prop("disabled",false);
+		$("#myModal").modal('hide');
 		write("update", function(){});
 		if(gndr) alert("Tenemos un ganador!!!");
 	}

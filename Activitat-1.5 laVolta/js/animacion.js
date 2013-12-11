@@ -26,7 +26,6 @@ function corredor(corr, posX, posY)
 }
 var vel = 10;
 var n=0;
-
 var posCorr;
 
 function divCanvas(){

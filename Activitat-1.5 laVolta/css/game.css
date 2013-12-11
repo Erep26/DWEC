@@ -27,25 +27,25 @@
 }
 
 
-#equipo1 {
+.equipo1 {
   border-color: #ebccd1;
 }
 
-#equipo1 > .panel-heading {
+.equipo1 > .panel-heading {
   color: #FFFFFF;
   background-color: #CD482E;
   border-color: #CD482E;
 }
 
-#equipo1 > .panel-heading + .panel-collapse .panel-body {
+.equipo1 > .panel-heading + .panel-collapse .panel-body {
   border-top-color: #ebccd1;
 }
 
-#equipo1 > .panel-heading > .dropdown .caret {
+.equipo1 > .panel-heading > .dropdown .caret {
   border-color: #CD482E transparent;
 }
 
-#equipo1 > .panel-footer + .panel-collapse .panel-body {
+.equipo1 > .panel-footer + .panel-collapse .panel-body {
   border-bottom-color: #CD482E;
 }
 

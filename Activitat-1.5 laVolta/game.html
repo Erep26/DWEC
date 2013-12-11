@@ -18,11 +18,11 @@
 			<canvas id="miCanvas" width="800px" height="250px" style="border: solid 1px black; top: 0px; left: 0px;"> navegador no compatible</canvas>
 
 			<div  class="col-xs-5 equipos">
-				<div id="equipo1" class="panel panel-primary">
+				<div class="equipo1" class="panel panel-primary">
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							Equipo <span id="eqp1"></span>
-							<span id="bolsa1" class="pull-right" style="position: relative; top: -5px;">
+							<span class="bolsa1 pull-right" style="position: relative; top: -5px;">
 								<div class="agua"></div>
 								<div class="grasa"></div>
 								<div class="azucar"></div>
@@ -31,7 +31,7 @@
 	        		</div>
 					<div class="panel-body" style="padding: 0px;">
 
-						<button id="btn1" class="btn btn-primary" style="width: 80%; margin-left: 10%; margin-right: 10%;" onclick="pasaTurno(this);">Pasar turno</button>
+						<button id="btn1" class="btn btn-primary" style="width: 80%; margin-left: 10%; margin-right: 10%;" onclick="repartoBolsa(this);">Pasar turno</button>
 
 						<ul class="nav nav-tabs" style="margin-top: 5px;">
 							<li class="active"><a href="#ordcorr1" data-toggle="tab" style="padding: 10px;">Orden de corredor</a></li>
@@ -202,7 +202,7 @@
 					<div class="panel-heading">
 						<h3 class="panel-title">
 							Equipo  <span id="eqp2"></span>
-							<span id="bolsa2" class="pull-right" style="position: relative; top: -5px;">
+							<span class="bolsa2 pull-right" style="position: relative; top: -5px;">
 								<div class="agua"></div>
 								<div class="grasa"></div>
 								<div class="azucar"></div>
@@ -210,7 +210,7 @@
 						</h3>
 	        		</div>
 					<div class="panel-body" style="padding: 0px;">
-						<button id="btn2" class="btn btn-primary" style="width: 80%; margin-left: 10%; margin-right: 10%;" onclick="pasaTurno(this);">Pasar turno</button>
+						<button id="btn2" class="btn btn-primary" style="width: 80%; margin-left: 10%; margin-right: 10%;" onclick="repartoBolsa(this);">Pasar turno</button>
 						<ul class="nav nav-tabs" style="margin-top: 5px;">
 							<li class="active"><a href="#ordcorr2" data-toggle="tab" style="padding: 10px;">Orden de corredor</a></li>
 							<li><a href="#ordeqp2" data-toggle="tab" style="padding: 10px;">Orden de equipo</a></li>
@@ -378,21 +378,98 @@
 		</div>
 
 		<!--Reparticion puntos bolsa de alimentos-->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal fade" data-backdrop="static" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="headerModal"></h4>
+		        <h4 class="modal-title" id="headerModal">Reparto de puntos de recurso</h4>
 		      </div>
-		      <form id="myForm" class="form-horizontal" role="form">
-			      <div class="modal-body" id="bodyModal"></div>
-			      <div class="modal-footer" id="footerModal"></div>
-			  </form>
+		      <div class="modal-body">
+
+				<div class="panel panel-primary equipo1">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Equipo 1
+							<span class="pull-right" style="position: relative; top: -5px;">
+								<img src="img/recursos/bolsa.png" style="height: 30px;"/>
+								<span id="ptsBolsa1">500</span>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+						<div class="col-sm-6" style="margin-bottom: 10px;">
+							<input id="repAgua1" min="0" value="0" type="number" class="form-control" onchange="repPuntos(1, this)"/>
+						</div>
+						<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+						<div class="col-sm-6" style="margin-bottom: 10px;">
+							<input id="repGluc1" min="0" value="0" type="number" class="form-control" onchange="repPuntos(1, this)"/>
+						</div>
+						<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+						<div class="col-sm-6" style="margin-bottom: 10px;">
+							<input id="repGrasa1" min="0" value="0" type="number" class="form-control" onchange="repPuntos(1, this)"/>
+						</div>
+					</div>
+					<div class="bolsa1 modal-footer" style="padding: 10px 15px;">
+						<div class="agua"></div>
+						<div class="grasa"></div>
+						<div class="azucar"></div>
+					</div>
+				</div>
+
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Equipo 2
+							<span class="pull-right" style="position: relative; top: -5px;">
+								<img src="img/recursos/bolsa.png" style="height: 30px;"/>
+								<span id="ptsBolsa2">500</span>
+							</span>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<label class="col-sm-3 control-label col-sm-offset-1">Agua</label>
+						<div class="col-sm-6" style="margin-bottom: 10px;">
+							<input id="repAgua2" min="0" value="0" type="number" class="form-control" onchange="repPuntos(2, this)"/>
+						</div>
+						<label class="col-sm-3 control-label col-sm-offset-1">Glucosa</label>
+						<div class="col-sm-6" style="margin-bottom: 10px;">
+							<input id="repGluc2" min="0" value="0" type="number" class="form-control" onchange="repPuntos(2, this)"/>
+						</div>
+						<label class="col-sm-3 control-label col-sm-offset-1">Grasa</label>
+						<div class="col-sm-6" style="margin-bottom: 10px;">
+							<input id="repGrasa2" min="0" value="0" type="number" class="form-control" onchange="repPuntos(2, this)"/>
+						</div>
+					</div>
+					<div class="bolsa2 modal-footer" style="padding: 10px 15px;">
+						<div class="agua"></div>
+						<div class="grasa"></div>
+						<div class="azucar"></div>
+					</div>
+				</div>
+
+
+
+		      </div>
+			  <div class="modal-footer" id="footerModal">
+			  	<button id="butListo1" onclick="pasaTurno(this)" class="btn btn-danger">Equipo 1 listo</button>
+			  	<button id="butListo2" onclick="pasaTurno(this)" class="btn btn-primary">Equipo 2 listo</button>
+			  </div>
 		    </div>
 		  </div>
 		</div>
-
+		<script type="text/javascript">
+			function repPuntos(e, inpt){
+				var bolsa = 500 - (parseInt($("#repAgua"+e).val()) + parseInt($("#repGluc"+e).val()) + parseInt($("#repGrasa"+e).val()));
+					$("#ptsBolsa"+e).text(bolsa);
+					if(bolsa < 0)
+					{
+						inpt.value = parseInt(inpt.value) + parseInt($("#ptsBolsa"+e).text());
+						bolsa = 500 - parseInt($("#repAgua"+e).val()) + parseInt($("#repGluc"+e).val()) + parseInt($("#repGrasa"+e).val());
+						$("#ptsBolsa"+e).text(bolsa);
+					}
+			}
+		</script>
 
 
 	</body>

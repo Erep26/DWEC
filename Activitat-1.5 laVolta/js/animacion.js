@@ -36,7 +36,7 @@ function divCanvas(){
   //desert
   ctx.drawImage(img.desert, i-800, 0);
   ctx.drawImage(img.desert, i, 0);
-  ctx.drawImage(img.desert, i+800, 0);
+  //ctx.drawImage(img.desert, i+800, 0);
   i-=8;
   if(i==0)i=800;
   if(vel == 10){

@@ -1,0 +1,315 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <script type="text/javascript" src="kinetic.js"></script></script>
+    <style type="text/css">
+    #container{
+        background-image: url("img/background.png");
+        background-size:cover;
+        background-repeat: no-repeat;
+        /*background-color: #200093;*/
+        display: inline-block;
+      }
+    .noCursor{
+      cursor: none;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="puntos"></div>
+    <div id="container"></div>
+    <script type="text/javascript">
+    var tJuego;
+    var puntos = 0;
+    var images = {};
+    var regalo;
+    var gifts = new Array();
+      function loadImages(sources, callback) {
+        var loadedImages = 0;
+        var numImages = 0;
+        for(var src in sources) {
+          numImages++;
+        }
+        for(var src in sources) {
+          images[src] = new Image();
+          images[src].onload = function() {
+            if(++loadedImages >= numImages) {
+              callback(images);
+            }
+          };
+          images[src].src = sources[src];
+        }
+      }
+      function buildStage(images) {
+        var santa = new Kinetic.Image({
+          image: images.santa,
+          x: 0,
+          y: 0,
+          scale: .7
+        });
+
+        var rudolf = new Kinetic.Image({
+          image: images.rudolf,
+          x: 150,
+          y: 0,
+          scale: .3
+        });
+
+        var reno = new Kinetic.Image({
+          image: images.reno,
+          x: 100,
+          y: 0,
+          scale: .3
+        });
+
+        trineo.add(santa);
+        trineo.add(rudolf);
+        trineo.add(reno);
+        layer.add(trineo);
+        stage.add(layer);
+        stage.add(layerInici);
+        layer.setZIndex(0);
+        layerInici.setZIndex(1);
+
+        var start = new Kinetic.RegularPolygon({
+          x: stage.getWidth()/2,
+          y: stage.getHeight()/2,
+          sides: 3,
+          radius: 50,
+          fill: "white"
+        });
+        start.rotateDeg(90);
+
+        start.on('click',function(){
+
+          document.getElementById('container').setAttribute('class', 'noCursor');
+          start.setListening(false);
+          layerInici.setVisible(false);
+          tJuego = new Date();
+
+
+          stage.on('contentMousemove',function(){
+            var mousePos = stage.getPointerPosition();
+            trineo.setPosition(mousePos.x, mousePos.y);
+          });
+          
+          stage.on('mousedown', function(){
+            var temp = new Date;
+            if(regalo == null || parseInt(temp.getTime()) - parseInt(regalo.getTime()) > 1000){
+              regalo = new Date;
+              var gift = new Kinetic.Image({
+                image: images.gift,
+                scale: .03,
+                x: trineo.getX(),
+                y: trineo.getY()
+                //filter: Kinetic.Filters.ShiftHue
+              });
+              gifts.push(gift);
+              layer.add(gift);
+            }
+          });
+        });
+
+        layerInici.add(start);
+        layerInici.draw();
+      }
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 1200,
+        height: 600
+      });
+
+      var trineo = new Kinetic.Group({
+        x: 250,
+        y: 200,
+        offsetX: 100,
+        offsetY: 50
+      });
+
+      var layer = new Kinetic.Layer();
+      var layerInici = new Kinetic.Layer();
+
+      var sources = {
+        rudolf: 'img/rudolf.svg',
+        reno: 'img/reno.svg',
+        santa: 'img/santa.svg',
+        gift: 'img/gift.png',
+        houses: 'img/casas.svg'
+      };
+
+      loadImages(sources, buildStage);
+
+      var houses1 = new Kinetic.Image({
+          image: images.houses,
+          y: 300,
+          x: 0,
+          scale: 3
+        });
+
+        var houses2 = new Kinetic.Image({
+          image: images.houses,
+          y: 300,
+          x: 1026*3,
+          scale: 3
+        });
+        layer.add(houses1);
+        layer.add(houses2);
+
+        //132 266 405 609 750 883
+        var targets = [
+          new Kinetic.Rect({
+            x: 132*3,
+            y: 315,
+            width: 30,
+            height: 1,
+            fill: 'white'
+          }),
+          new Kinetic.Rect({
+            x: 266*3,
+            y: 360,
+            width: 30,
+            height: 1,
+            fill: 'white'
+          }),
+          new Kinetic.Rect({
+            x: 405*3,
+            y: 375,
+            width: 30,
+            height: 1,
+            fill: 'white'
+          }),
+          new Kinetic.Rect({
+            x: 609*3,
+            y: 380,
+            width: 30,
+            height: 1,
+            fill: 'white'
+          }),
+          new Kinetic.Rect({
+            x: 750*3,
+            y: 360,
+            width: 30,
+            height: 1,
+            fill: 'white'
+          }),
+          new Kinetic.Rect({
+            x: 883*3,
+            y: 315,
+            width: 30,
+            height: 1,
+            fill: 'white'
+          })
+        ];
+        targets.forEach(function(target){
+            layer.add(target)
+          });
+
+        var timeText = new Kinetic.Text({
+          x: stage.getWidth() - 120,
+          y: 15,
+          text: '05:00',
+          fontSize: 50,
+          fontFamily: 'Calibri',
+          fill: 'white',
+          stroke: 'black'
+        });
+        layer.add(timeText);
+
+        var giftText = new Kinetic.Text({
+          x: 80,
+          y: 15,
+          text: '00',
+          fontSize: 50,
+          fontFamily: 'Calibri',
+          fill: 'white',
+          stroke: 'black'
+        });
+        layer.add(giftText);        
+
+        var snowballs = new Array();;
+        function newBall(){
+          var ball = new Kinetic.Circle({
+            x: 380,
+            y: 0,
+            radius: 1,
+            fill: 'white',
+          });
+          ball.amplitud = (Math.random()*30)+10;
+          ball.velocidad = (Math.random()*0.08)+0.005;
+          ball.centro = (Math.random()*stage.getWidth());
+          var date = new Date();
+          ball.date = date.getTime();
+          snowballs.push(ball);
+          layer.add(ball);
+        }
+
+
+      var anim = new Kinetic.Animation(function(frame) {
+        var time = frame.time,
+            timeDiff = frame.timeDiff,
+            frameRate = frame.frameRate;
+
+        var date = new Date();
+        if(!layerInici.getVisible()){
+          var temGame = date - tJuego;
+          var min = parseInt(date.getMinutes()) - parseInt(tJuego.getMinutes());
+          var sec = parseInt(date.getSeconds()) - parseInt(tJuego.getSeconds());
+          //console.log(min+":"+sec)
+          if(min < 10) min = '0'+min;
+          if(sec < 10) sec = '0'+sec;
+          timeText.setText(min + ":" + sec);
+        }
+        if(!layerInici.getVisible() && date.getTime() - tJuego.getTime() > 60000*5){
+          document.getElementById('container').setAttribute('class', '');
+          start.setListening(true);
+          layerInici.setVisible(true);
+        }
+
+        if(snowballs.length == 0 || (snowballs.length < 150 && date.getTime() - snowballs[snowballs.length-1].date > 100)) newBall();
+        snowballs.forEach(function(b, i){
+          b.move({y: b.velocidad*20});
+          var x = b.amplitud*Math.sin(b.getY()*b.velocidad)+b.centro;
+          b.setX(x);
+          if(b.getY() > stage.getHeight()){
+            b.remove();
+            snowballs.splice(i, 1);
+          }
+        });
+        //console.log(snowballs.length);
+
+        gifts.forEach(function(g, i){
+          g.move({x: -6, y: 3});
+          g.rotateDeg(1);
+          if(g.getY() > stage.getHeight() || !g.getVisible()){
+            g.setVisible(false);
+            g.remove();
+            gifts.splice(i, 1);
+          }
+        });
+        targets.forEach(function(target){
+            target.move({x: -5});
+            if(target.getX() <= -10 || !target.getVisible()){
+              target.setX(target.getX()+(1026*3));
+              target.setVisible(true);
+            }
+            gifts.forEach(function(g){
+              if(target.getVisible() && ((g.getHeight()*0.03) + g.getY() > target.getY() && g.getY() < target.getY()) &&
+                ((g.getWidth() *0.03) + g.getX() > target.getX() && g.getX() < target.getX() + target.getWidth()))
+              {
+                target.setVisible(false);
+                //g.setVisible(false);
+                g.setVisible(false);
+                document.getElementById('puntos').innerHTML = ++puntos;
+              }
+            });
+          });
+        if(houses1.getX() <= -1026*3) houses1.setX(houses2.getX()+(1026*3));
+        if(houses2.getX() <= -1026*3) houses2.setX(houses1.getX()+(1026*3));
+        houses1.move({x: -5});
+        houses2.move({x: -5});
+        //console.log(gifts);
+      }, layer);
+      anim.start();
+    </script>
+  </body>
+</html>

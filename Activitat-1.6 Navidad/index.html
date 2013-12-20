@@ -62,9 +62,18 @@
           scale: .3
         });
 
+        var giftPoints = new Kinetic.Image({
+                image: images.gift,
+                scale: .05,
+                x: 13,
+                y: 15
+                //filter: Kinetic.Filters.ShiftHue
+              });
+
         trineo.add(santa);
         trineo.add(rudolf);
         trineo.add(reno);
+        layer.add(giftPoints);
         layer.add(trineo);
         stage.add(layer);
         stage.add(layerInici);
@@ -216,9 +225,9 @@
         layer.add(timeText);
 
         var giftText = new Kinetic.Text({
-          x: 80,
+          x: 65,
           y: 15,
-          text: '00',
+          text: 'x00',
           fontSize: 50,
           fontFamily: 'Calibri',
           fill: 'white',
@@ -299,7 +308,9 @@
                 target.setVisible(false);
                 //g.setVisible(false);
                 g.setVisible(false);
-                document.getElementById('puntos').innerHTML = ++puntos;
+                var strPuntos = ++puntos;
+                if(strPuntos < 10) strPuntos = "0" + strPuntos;
+                giftText.setText("x" + strPuntos);
               }
             });
           });
